@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<title>GO-FAR</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=9" />
+
+		<link rel="stylesheet" href="src/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="src/css/main.css" />
+
+		<script src="src/lib/jquery-1.11.0.min.js"></script>
+		<script src="src/lib/knockout-3.1.0.js"></script>
+		<script src="src/lib/underscore-1.6.0.js"></script>
+		<script src="src/js/gofar.js"></script>
+	</head>
+
+	<body>
+		<div id="content" class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>Good Outcome Following Attempted Resuscitation (GO-FAR)</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<p class="bg-info padding">Check each condition present on admission to the hospital to calculate total score and probability of survival.</p>
+				</div>
+			</div>
+
+			<div id="components" class="row">
+				<!-- ko foreach: { data: components, as: 'component' } -->
+				<div class="component col-md-4 col-xs-6">
+					<div class="checkbox">
+						<input class="col-md-1 col-xs-1" data-bind="click: $root.addPoints, checked: component.selected " type="checkbox" />
+						<label class="col-md-11 col-xs-11" data-bind="click: $root.addPoints, text: component.label"></label>
+					</div>
+				</div>
+				<!-- /ko -->
+				<div class="clearfix"></div>
+			</div>
+
+			<div class="row">
+				<table class="table">
+					<tr>
+						<td class="col-md-4 col-xs-4">Total Score:</td>
+						<td class="col-md-2 text-center col-xs-2"><b><span data-bind="text: points"></span></b></td>
+					</tr>
+					<tr>
+						<td class="col-md-4 col-xs-4">Probability of survival to discharge with good neurologic status following CPR for in-hospital arrest:</td>
+						<td class="col-md-2 text-center col-xs-2"><b><span data-bind="text: probability"></span></b></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td class="text-right"><button data-bind="click: clearAll, enable: anySelected()" type="button" class="btn btn-info">Clear All</button></td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<p class="smaller">* Cerebral Performance Category [CPC] score = 1 [i.e., conscious, alert, able to work, with possible mild neurologic or psychological deficits]</p>
+					<p class="smaller">Content derived from Ebell MA et al, Development and Validation of the Good Outcome Following Attempted Resuscitation (GO-FAR) Score to Predict Neurologically Intact Survival After In-Hospital Cardiopulmonary Resuscitation JAMA Internal Medicine November 11, 2013 Volume 173, Number 20</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<p class="smaller text-center">Jonathan Rubins &copy; 2014</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
