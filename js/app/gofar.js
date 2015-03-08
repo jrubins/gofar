@@ -224,6 +224,16 @@
 		}, function() {
 			$(this).css("background-color", "#fff");
 		});
+
+		// bind to user keypresses on the patient age input box to prevent
+		// submitting the form if a user clicks enter
+		$("#patientAge").on('keydown', function(event) {
+			// check if the key pressed was the enter key
+			if(event.keyCode === 13) {
+				event.preventDefault();
+				return false;
+			}
+		});
 	});
 
 })(window.gofar = window.gofar || {});
