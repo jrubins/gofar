@@ -30,7 +30,7 @@
 		// the calculation
 		this.staticComponents = [
 			{
-				label: "Moderate or worse cerebral disability*",
+				label: "Moderate or Severe cognitive/neurologic disability*",
 				points: 15			
 			},
 			{
