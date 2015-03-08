@@ -9,3 +9,26 @@ p {
 .smaller {
 	font-size: 12px;
 }
+
+.component {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.component label {
+	padding-top: 17px;
+	padding-bottom: 10px;
+}
+
+.componentLabel {
+	display: inline-block;
+	width: 100%;
+}
+
+#patientAgeGroup {
+	padding-left: 8px;
+}
+
+#patientAgeLabel {
+	font-weight: normal;
+}

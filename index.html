@@ -1,17 +1,30 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
 		<title>GO-FAR</title>
 
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="X-UA-Compatible" content="IE=9" />
+		<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="src/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="src/css/main.css" />
+		<!-- include our Bootstrap style and our app's style -->
+		<link rel="stylesheet" href="css/bootstrap-3.1.1.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
 
-		<script src="src/lib/jquery-1.11.0.min.js"></script>
-		<script src="src/lib/knockout-3.1.0.js"></script>
-		<script src="src/lib/underscore-1.6.0.js"></script>
-		<script src="src/js/gofar.js"></script>
+		<!-- include our JS libraries -->
+		<script src="js/lib/jquery-1.11.0.min.js"></script>
+		<script src="js/lib/knockout-3.1.0.min.js"></script>
+		<script src="js/lib/underscore-1.8.2.min.js"></script>
+
+		<!-- include our app script -->
+		<script src="js/app/gofar.min.js"></script>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
 	</head>
 
 	<body>
@@ -28,47 +41,72 @@
 				</div>
 			</div>
 
-			<div id="components" class="row">
-				<!-- ko foreach: { data: components, as: 'component' } -->
-				<div class="component col-md-4 col-xs-6">
-					<div class="checkbox">
-						<input class="col-md-1 col-xs-1" data-bind="click: $root.addPoints, checked: component.selected " type="checkbox" />
-						<label class="col-md-11 col-xs-11" data-bind="click: $root.addPoints, text: component.label"></label>
+			<form id="components" class="form-horizontal">
+				<div class="form-group">
+					<!-- ko foreach: { data: components, as: 'component' } -->
+					<div class="component col-md-4 col-sm-6 col-xs-12">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" data-bind="click: $root.addComponentPoints, checked: component.selected" /> <span class="componentLabel" data-bind="text: component.label"></span>
+							</label>
+						</div>
 					</div>
+					<!-- /ko -->
 				</div>
-				<!-- /ko -->
-				<div class="clearfix"></div>
-			</div>
+			</form>
 
 			<div class="row">
-				<table class="table">
-					<tr>
-						<td class="col-md-4 col-xs-4">Total Score:</td>
-						<td class="col-md-2 text-center col-xs-2"><b><span data-bind="text: points"></span></b></td>
-					</tr>
-					<tr>
-						<td class="col-md-4 col-xs-4">Probability of survival to discharge with good neurologic status following CPR for in-hospital arrest:</td>
-						<td class="col-md-2 text-center col-xs-2"><b><span data-bind="text: probability"></span></b></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td class="text-right"><button data-bind="click: clearAll, enable: anySelected()" type="button" class="btn btn-info">Clear All</button></td>
-					</tr>
-				</table>
+				<form class="col-md-12 form-inline">
+					<div id="patientAgeGroup" class="form-group padding">
+						<label for="patientAge" id="patientAgeLabel">Patient Age:</label>
+						<input type="number" id="patientAge" class="form-control" data-bind="value: patientAge, valueUpdate: 'keyup'" />
+					</div>
+				</form>
 			</div>
 
 			<div class="row">
 				<div class="col-md-12">
-					<p class="smaller">* Cerebral Performance Category [CPC] score = 1 [i.e., conscious, alert, able to work, with possible mild neurologic or psychological deficits]</p>
+					<table class="table">
+						<tr>
+							<td class="col-md-4 col-xs-4">Total Score:</td>
+							<td class="col-md-2 text-center col-xs-2"><b><span data-bind="text: totalPoints"></span></b></td>
+						</tr>
+						<tr>
+							<td class="col-md-4 col-xs-4">Probability of survival to discharge with good neurologic status following CPR for in-hospital arrest:</td>
+							<td class="col-md-2 text-center col-xs-2"><b><span data-bind="text: probability"></span></b></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="text-right"><button data-bind="click: clearAll, enable: anySelected()" type="button" class="btn btn-info">Clear All</button></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<p class="smaller">* Cerebral Performance Category [CPC] score >= 2</p>
 					<p class="smaller">Content derived from Ebell MA et al, Development and Validation of the Good Outcome Following Attempted Resuscitation (GO-FAR) Score to Predict Neurologically Intact Survival After In-Hospital Cardiopulmonary Resuscitation JAMA Internal Medicine November 11, 2013 Volume 173, Number 20</p>
+					<p class="smaller">DISCLAIMER: All calculations must be confirmed before use. The authors make no claims of the accuracy of the information contained herein; and these suggested doses are not a substitute for clinical judgement. Neither Jonathan Rubins nor any other party involved in the preparation or publication of this site shall be liable for any special, consequential, or exemplary damages resulting in whole or part from any user's use of or reliance upon this material.</p>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-md-12">
-					<p class="smaller text-center">Jonathan Rubins &copy; 2014</p>
+					<p class="smaller text-center">Jonathan Rubins &copy; 2015</p>
 				</div>
 			</div>
 		</div>
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-13143234-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
 	</body>
 </html>
