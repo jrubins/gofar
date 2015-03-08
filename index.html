@@ -41,6 +41,15 @@
 				</div>
 			</div>
 
+			<div class="row">
+				<form class="col-md-12 form-inline">
+					<div id="patientAgeGroup" class="form-group padding">
+						<label for="patientAge" id="patientAgeLabel">Patient Age:</label>
+						<input type="number" id="patientAge" class="form-control" data-bind="value: patientAge, valueUpdate: 'keyup'" />
+					</div>
+				</form>
+			</div>
+
 			<form id="components" class="form-horizontal">
 				<div class="form-group">
 					<!-- ko foreach: { data: components, as: 'component' } -->
@@ -54,15 +63,6 @@
 					<!-- /ko -->
 				</div>
 			</form>
-
-			<div class="row">
-				<form class="col-md-12 form-inline">
-					<div id="patientAgeGroup" class="form-group padding">
-						<label for="patientAge" id="patientAgeLabel">Patient Age:</label>
-						<input type="number" id="patientAge" class="form-control" data-bind="value: patientAge, valueUpdate: 'keyup'" />
-					</div>
-				</form>
-			</div>
 
 			<div class="row">
 				<div class="col-md-12">
