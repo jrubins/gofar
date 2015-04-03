@@ -10,18 +10,13 @@ p {
 	font-size: 12px;
 }
 
-.component {
-	padding-top: 10px;
-	padding-bottom: 10px;
+.component .checkbox {
+	padding-top: 0;
 }
 
 .component label {
-	padding-top: 17px;
+	padding-top: 10px;
 	padding-bottom: 10px;
-}
-
-.componentLabel {
-	display: inline-block;
 	width: 100%;
 }
 

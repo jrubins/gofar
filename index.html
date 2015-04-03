@@ -8,11 +8,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 
 		<!-- include our Bootstrap style and our app's style -->
-		<link rel="stylesheet" href="css/bootstrap-3.1.1.min.css" />
+		<link rel="stylesheet" href="css/bootstrap-3.3.4.min.css" />
 		<link rel="stylesheet" href="css/main.css" />
 
 		<!-- include our JS libraries -->
 		<script src="js/lib/jquery-1.11.0.min.js"></script>
+		<script src="js/lib/bootstrap-3.3.4.min.js"></script>
 		<script src="js/lib/knockout-3.1.0.min.js"></script>
 		<script src="js/lib/underscore-1.8.2.min.js"></script>
 
@@ -58,7 +59,7 @@
 							<label>
 								<input type="checkbox" data-bind="click: $root.addComponentPoints, checked: component.selected" /> 
 								<div class="componentLabel">
-									<span data-bind="text: component.label, attr: { title: component.helpText }"></span>
+									<span data-bind="text: component.label"></span> <!-- ko if: component.helpText --><span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom" data-bind="attr: { title: component.helpText }"></span><!-- /ko -->
 								</div>
 							</label>
 						</div>

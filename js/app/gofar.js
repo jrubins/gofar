@@ -33,7 +33,7 @@
 		// the calculation
 		this.staticComponents = [
 			{
-				label: "Moderate or Severe cognitive/neurologic disability*",
+				label: "Moderate or Severe cognitive/neurologic disability",
 				points: 15,
 				helpText: "Moderate = able to live independently with disabilities which may include hemiplegia, seizures, ataxia, dysphagia, or permanent memory or mental changes"
 			},
@@ -247,6 +247,9 @@
 				return false;
 			}
 		});
+
+		// Initialize our Bootstrap tooltips.
+		$("[data-toggle='tooltip']").tooltip();
 	});
 
 })(window.gofar = window.gofar || {});
