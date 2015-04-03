@@ -259,7 +259,7 @@
 
 		// Bind to a user clicking a component help tooltip - we want to prevent
 		// the default action here of selecting the component.
-		$(".component-help-text").on('click', function(event) {
+		$(".component-help-tooltip").on('click', function(event) {
 			return false;
 		});
 	});
