@@ -239,12 +239,13 @@
 			}
 		});
 
-		// Add our hover listener so we can change the background color to inform
-		// the user they can select an option.
-		$("#components .component").hover(function() {
-			$(this).addClass("active");
-		}, function() {
+		// Add our mouseover listener so we can change the background color of the
+		// component that is being hovered over to inform the user they can select 
+		// the component. (We also remove all other "active" components because they
+		// can no longer be selected.)
+		$("#components .component").on('mouseover', function() {
 			$(".component").removeClass("active");
+			$(this).addClass("active");
 		});
 
 		// Bind to user keypresses on the patient age input box to prevent
@@ -252,7 +253,6 @@
 		$("#patientAge").on('keydown', function(event) {
 			// Check if the key pressed was the enter key.
 			if(event.keyCode === 13) {
-				event.preventDefault();
 				return false;
 			}
 		});
@@ -260,7 +260,6 @@
 		// Bind to a user clicking a component help tooltip - we want to prevent
 		// the default action here of selecting the component.
 		$(".component-help-text").on('click', function(event) {
-			event.preventDefault();
 			return false;
 		});
 	});
