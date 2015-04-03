@@ -230,12 +230,21 @@
 		// bind our model to our view
 		ko.applyBindings(new GO_FAR.ViewModel(), $("#content")[0]);
 
+		// Initialize our Bootstrap tooltips.
+		$("[data-toggle='tooltip']").tooltip({
+			trigger: "hover focus click",
+			delay: {
+				"show": 300,
+				"hide": 100
+			}
+		});
+
 		// add our hover listener so we can change the background color to inform
 		// the user they can select an option
 		$("#components .component").hover(function() {
-			$(this).css("background-color", "#e6e6e6");
+			$(this).addClass("active");
 		}, function() {
-			$(this).css("background-color", "#fff");
+			$(".component").removeClass("active");
 		});
 
 		// bind to user keypresses on the patient age input box to prevent
@@ -248,8 +257,10 @@
 			}
 		});
 
-		// Initialize our Bootstrap tooltips.
-		$("[data-toggle='tooltip']").tooltip();
+		$(".component-help-text").on('click', function(event) {
+			event.preventDefault();
+			return false;
+		});
 	});
 
 })(window.gofar = window.gofar || {});
