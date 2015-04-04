@@ -39,3 +39,9 @@ p {
 	/* Normal Bootstrap labels are bold, so let's not make this one bold. */
 	font-weight: normal;
 }
+
+.tooltip-inner {
+	/* Make sure the width of our tooltips is at least 150px - this adds to
+		the default Bootstrap styling for tooltips. */
+	min-width: 150px;
+}
