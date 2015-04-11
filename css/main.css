@@ -49,3 +49,25 @@ p {
 		the default Bootstrap styling for tooltips. */
 	min-width: 150px;
 }
+
+.footer {
+	margin: 15px 0;
+}
+
+/* A black circle that can be used as a separator (e.g. in the footer). */
+.black-circle {
+	display: inline-block;
+	background-color: #000;
+	height: 5px;
+	width: 5px;
+	border-radius: 5px;
+	margin: 0 5px;
+	vertical-align: middle;
+}
+
+/* Style for an error message on an invalid form field message. */
+.form-invalid-text {
+	color: #A94442;
+	font-weight: bold;
+	font-size: 12px;
+}

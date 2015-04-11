@@ -1,3 +1,5 @@
+/* global ko, s */
+
 (function(GO_FAR) {
 
 	/**
@@ -5,9 +7,9 @@
 	 * @constructor
 	 * @param {String} label - The label for the component.
 	 * @param {int} points - The number of points to add to the total when the component
-	 * 		is selected.
+	 *		is selected.
 	 * @param {String} helpText - The help text that defines the component to display as
-	 * 		the HTML "title" attribute to the user.
+	 *		the HTML "title" attribute to the user.
 	 */
 	GO_FAR.Component = function(label, points, helpText) {
 		this.label = label;
@@ -226,7 +228,7 @@
 		return this;
 	};
 
-	$(document).on('ready', function() {
+	$(document).on("ready", function() {
 		// Bind our view model to our view.
 		ko.applyBindings(new GO_FAR.ViewModel(), $("#content")[0]);
 
@@ -243,14 +245,14 @@
 		// component that is being hovered over to inform the user they can select 
 		// the component. (We also remove all other "active" components because they
 		// can no longer be selected.)
-		$("#components .component").on('mouseover', function() {
+		$("#components .component").on("mouseover", function() {
 			$(".component").removeClass("active");
 			$(this).addClass("active");
 		});
 
 		// Bind to user keypresses on the patient age input box to prevent
 		// submitting the form if a user clicks the 'Enter' key.
-		$("#patientAge").on('keydown', function(event) {
+		$("#patientAge").on("keydown", function(event) {
 			// Check if the key pressed was the enter key.
 			if(event.keyCode === 13) {
 				return false;
@@ -259,8 +261,70 @@
 
 		// Bind to a user clicking a component help tooltip - we want to prevent
 		// the default action here of selecting the component.
-		$(".component-help-tooltip").on('click', function(event) {
+		$(".component-help-tooltip").on("click", function() {
 			return false;
+		});
+
+		// Bind to when the feedback form is submitted.
+		$("#feedback-form").on("submit", function() {
+			// Hide the message that our form was submitted successfully.
+			$("#form-submitted").addClass("hidden");
+
+			var feedbackTextArea = $("textarea[name='entry.612948227']");
+
+			// Check to see if the value entered into the feedback field is empty.
+			if(s(feedbackTextArea.val()).trim().isBlank()) {
+				// Show our error message to the user that they need some value for the feedback field.
+				feedbackTextArea.siblings(".form-invalid-text").removeClass("hidden");
+				feedbackTextArea.parents(".form-group").addClass("has-error has-feedback");
+
+				// Since we don't have a valid value for the feedback textarea, return false
+				// so the user can fill in some feedback.
+				return false;
+			} else { // The textarea value is valid.
+				// Hide the error message since the feedback field is valid.
+				feedbackTextArea.siblings(".form-invalid-text").addClass("hidden");
+				feedbackTextArea.parents(".form-group").removeClass("has-error has-feedback");
+
+				// Show the user the message that the form was submitted successfully.
+				$("#form-submitted").removeClass("hidden");
+
+				// Slide up the content of the form so the user can no longer interact with it.
+				$("#form-content").slideUp("fast");
+
+				// Disable the submit button so they can't submit more than once.
+				$("#feedback-form-submit").addClass("disabled");
+			}
+		});
+
+		// Bind to when the feedback modal is about to be shown.
+		$("#feedback-modal").on("show.bs.modal", function() {
+			// Clear the value out of the "name" field.
+			$("input[name='entry.468931824']").val("");
+
+			// Clear the value out of the "email" field.
+			$("input[name='entry.455716436']").val("");
+
+			// Clear the value out of the feedback textarea.
+			$("textarea[name='entry.612948227']").val("");
+			
+		});
+
+		// Bind to when the feedback modal has been hidden.
+		$("#feedback-modal").on("hidden.bs.modal", function() {
+			// Hide our message that the form was submitted successfully.
+			$("#form-submitted").addClass("hidden");
+
+			// Re-show the main content of the feedback form so the user can
+			// submit more feedback if needed.
+			$("#form-content").show();
+
+			// Re-enable the submit button for our feedback form.
+			$("#feedback-form-submit").removeClass("disabled");
+
+			// Hide the error message that the feedback textarea is invalid.
+			$("textarea[name='entry.612948227']").parents(".form-group").removeClass("has-error has-feedback");
+			$(".form-invalid-text").addClass("hidden");
 		});
 	});
 
