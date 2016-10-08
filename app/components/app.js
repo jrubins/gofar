@@ -1,15 +1,13 @@
-'use strict';
+import React, { PropTypes } from 'react';
 
-import React from 'react';
+const App = ({ children }) => (
+  <div className="app-container">
+    {children}
+  </div>
+);
 
-class App extends React.Component {
-    render() {
-        return (
-            <div className='app-container'>
-                {this.props.children}
-            </div>
-        );
-    }
+App.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default App;

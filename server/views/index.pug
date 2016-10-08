@@ -1,0 +1,45 @@
+doctype html
+html(
+  lang='en'
+)
+  head
+    meta(
+      charset='utf-8'
+    )
+    meta(
+      http-equiv='X-UA-Compatible'
+      content='IE=edge'
+    )
+    meta(
+      name='viewport'
+      content='width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no'
+    )
+    meta(
+      name='description'
+      content='GO-FAR calculator to estimate the chance of good outcomes following CPR in the hospital.'
+    )
+
+    //- Include a calculator favicon.
+    link(
+      rel='icon'
+      type='image/x-icon'
+      href='images/favicon.ico'
+    )
+
+    title= 'GO-FAR Calculator'
+
+    link(
+      href='/css/app.css'
+      rel='stylesheet'
+      type='text/css'
+    )
+
+  body
+    #app!= html
+
+    script(type='text/javascript').
+      window.__INITIAL_STATE__ = !{JSON.stringify(state)};
+
+    script(
+      src='/scripts/bundle.js'
+    )

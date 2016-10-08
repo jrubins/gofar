@@ -1,7 +1,0 @@
-'use strict';
-
-export const PATIENT_AGE_CHANGED = 'PATIENT_AGE_CHANGED';
-
-export const POINTS_CHANGED = 'POINTS_CHANGED';
-
-export const RESET_CALCULATOR = 'RESET_CALCULATOR';

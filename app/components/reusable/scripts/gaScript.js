@@ -1,13 +1,26 @@
-'use strict';
-
 import React from 'react';
 
-class GaScript extends React.Component {
-    render() {
-        return (
+import { setupGaTracker, initAndSendPageview, getGaScriptUrl } from 'utils/ga';
+import { insertScript } from 'utils/scripts';
 
-        );
-    }
-};
+export default class GaScript extends React.Component {
+  componentDidMount() {
+    setupGaTracker();
 
-export default GaScript;
+    initAndSendPageview();
+
+    insertScript({
+      id: 'ga-js',
+      src: getGaScriptUrl(),
+      async: true,
+    });
+  }
+
+  shouldComponentUpdate() {
+    return false;
+  }
+
+  render() {
+    return null;
+  }
+}
