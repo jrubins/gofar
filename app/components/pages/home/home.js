@@ -28,7 +28,7 @@ const HomePage = ({ toggleModal, isModalOpen }) => (
   <div id="content" className="container">
     <div className="row">
       <div className="col-md-12">
-        <h1>Good Outcome Following Attempted Resuscitation (GO-FAR)</h1>
+        <h1 className="gofar-title">Good Outcome Following Attempted Resuscitation (GO-FAR)</h1>
       </div>
     </div>
 

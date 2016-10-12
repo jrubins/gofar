@@ -1,5 +1,9 @@
 .patient-age-input-container {
   padding-left: 8px;
+
+  @media (max-width: $screen-xs-max) {
+    padding: 10px 0;
+  }
 }
 
 /**
@@ -11,4 +15,8 @@
 
 .patient-age-input {
   margin-left: 10px;
+
+  @media (max-width: $screen-xs-max) {
+    margin-left: 0;
+  }
 }

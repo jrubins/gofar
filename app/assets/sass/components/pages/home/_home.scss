@@ -1,3 +1,9 @@
+.gofar-title {
+  @media(max-width: $screen-xs-max) {
+    font-size: 24px;
+  }
+}
+
 .footer {
   margin: 15px 0;
 }
