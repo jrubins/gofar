@@ -1,9 +1,26 @@
 import React from 'react';
 
+import { customEvent } from 'utils/ga';
+
+/**
+ * Handles clicks on the attribution link.
+ */
+function handleAttributionClick() {
+  customEvent('Attribution', 'Click');
+}
+
+/**
+ * The attribution URL for the paper the content is derived from.
+ *
+ * @type {String}
+ */
+const ATTRIBUTION_URL = 'http://archinte.jamanetwork.com/article.aspx?articleid=1735894';
+
 const Attribution = () => (
   <div>
     <p className="smaller">
-      Content derived from <a href="http://archinte.jamanetwork.com/article.aspx?articleid=1735894" target="_blank">
+      {'Content derived from '}
+      <a href={ATTRIBUTION_URL} target="_blank" onClick={handleAttributionClick}>
       Ebell MA et al, Development and Validation of the Good Outcome Following Attempted Resuscitation (GO-FAR) Score
       to Predict Neurologically Intact Survival After In-Hospital Cardiopulmonary Resuscitation JAMA Internal Medicine
       November 11, 2013 Volume 173, Number 20</a>
