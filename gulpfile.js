@@ -16,6 +16,8 @@ var looseEnvify = require('loose-envify');
 var source = require('vinyl-source-stream'); // Use conventional text streams with Gulp
 var sass = require('gulp-sass');
 var through2 = require('through2');
+var uglify = require('gulp-uglify');
+var autoprefixer = require('gulp-autoprefixer');
 
 var config = require('./config/buildConfig').default; // Configuration options.
 var Constants = require('./app/constants/constants');
@@ -79,6 +81,15 @@ gulp.task('sass', function() {
     .pipe(server ? server.notify() : through2.obj());
 });
 
+gulp.task('css:prefix', ['sass'], function() {
+  gulp.src(config.paths.dist + '/css/app.css')
+    .pipe(autoprefixer({
+      browsers: ['> 5%'],
+      cascade: false,
+    }))
+    .pipe(gulp.dest(config.paths.dist + '/css'));
+});
+
 gulp.task('js', function(cb) {
   browserifier.bundle()
     .on('error', function(error) {
@@ -91,6 +102,12 @@ gulp.task('js', function(cb) {
     .pipe(source('bundle.js'))
     .pipe(gulp.dest(config.paths.dist + '/scripts'))
     .on('end', cb);
+});
+
+gulp.task('js:uglify', ['js'], function() {
+  gulp.src(config.paths.dist + '/scripts/bundle.js')
+    .pipe(uglify())
+    .pipe(gulp.dest(config.paths.dist + '/scripts'));
 });
 
 gulp.task('watch', function() {
@@ -110,7 +127,9 @@ gulp.task('build', [
   'images',
   'fonts',
   'sass',
+  'css:prefix',
   'js',
+  'js:uglify',
 ]);
 
 gulp.task('default', [
