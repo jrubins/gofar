@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 
+import { customEvent } from 'utils/ga';
+
 class SymptomInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -24,6 +26,8 @@ class SymptomInfo extends React.Component {
 
     this.showInfoTextTimeout = window.setTimeout(() => {
       if (this.mouseOverInfoText) {
+        customEvent('Info Text', 'Shown');
+
         this.setState({
           showInfoText: true,
         });

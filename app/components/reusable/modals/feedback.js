@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import cn from 'classnames';
 import _ from 'lodash';
 
+import { customEvent } from 'utils/ga';
+
 import { getIsModalOpen } from 'reducers';
 import { toggleModal } from 'actions/modal';
 
@@ -17,22 +19,42 @@ class FeedbackModal extends React.Component {
 
     this.handleChangeFeedback = this.handleChangeFeedback.bind(this);
     this.handleFeedbackSubmit = this.handleFeedbackSubmit.bind(this);
+    this.handleCloseFeedback = this.handleCloseFeedback.bind(this);
   }
 
+  /**
+   * Handles when a user enters in feedback.
+   *
+   * @param {Event} event
+   */
   handleChangeFeedback(event) {
     this.setState({
       feedback: event.target.value,
     });
   }
 
+  /**
+   * Handles when feedback is submitted.
+   */
   handleFeedbackSubmit() {
+    customEvent('Feedback', 'Submitted');
+
     this.setState({
       isFormSubmitted: true,
     });
   }
 
+  /**
+   * Handles when the feedback modal is closed.
+   */
+  handleCloseFeedback() {
+    customEvent('Feedback', 'Closed', 'Modal');
+
+    this.props.toggleModal();
+  }
+
   render() {
-    const { isModalOpen, toggleModal } = this.props;
+    const { isModalOpen } = this.props;
 
     return (
       <div
@@ -59,7 +81,7 @@ class FeedbackModal extends React.Component {
                 <button
                   type="button"
                   className="close"
-                  onClick={toggleModal}
+                  onClick={this.handleCloseFeedback}
                 >
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -129,7 +151,7 @@ class FeedbackModal extends React.Component {
                 <button
                   type="button"
                   className="btn btn-default"
-                  onClick={toggleModal}
+                  onClick={this.handleCloseFeedback}
                 >
                   Close
                 </button>

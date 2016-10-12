@@ -1,3 +1,5 @@
+import { ENV_DEV } from 'constants/constants';
+
 /**
  * The tracker name for the global GA object for pushing events.
  *
@@ -10,7 +12,7 @@ const GA_TRACKER_NAME = 'ga';
  *
  * @type {String}
  */
-const GA_UA_ID = 'UA-60588544-1';
+const GA_UA_ID = process.env.NODE_ENV === ENV_DEV ? process.env.GA_DEV_PROPERTY : process.env.GA_PROD_PROPERTY;
 
 /**
  * The GA script URL.
@@ -36,4 +38,13 @@ export function setupGaTracker() {
 export function initAndSendPageview() {
   window[GA_TRACKER_NAME]('create', GA_UA_ID, 'auto');
   window[GA_TRACKER_NAME]('send', 'pageview');
+}
+
+/**
+ * Sends a custom event.
+ *
+ * @param {Object} opts
+ */
+export function customEvent(...opts) {
+  window[GA_TRACKER_NAME]('send', 'event', ...opts);
 }

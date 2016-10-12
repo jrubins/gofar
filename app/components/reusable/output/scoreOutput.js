@@ -1,6 +1,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import { customEvent } from 'utils/ga';
+import {
+  calculatePointsFromAge,
+  calculateProbabilityFromPoints,
+} from 'utils/points';
+
 import {
   getAge,
   getSymptomPoints,
@@ -9,10 +15,17 @@ import {
 import {
   resetCalculator,
 } from 'actions/calculator';
-import {
-  calculatePointsFromAge,
-  calculateProbabilityFromPoints,
-} from 'utils/points';
+
+/**
+ * Handles when a user clicks the "Clear All" button on the calculator.
+ *
+ * @param {Function} resetCalculator
+ */
+function handleClearAllClick(resetCalculator) {
+  customEvent('Clear All', 'Clicked');
+
+  resetCalculator();
+}
 
 /**
  * Represents the initial symptom points for the calculations.
@@ -47,7 +60,7 @@ const ScoreOutput = ({ age, symptomPoints, numSymptomsSelected, resetCalculator 
               className="btn btn-info"
               type="button"
               disabled={clearAllBtnDisabled ? 'disabled' : null}
-              onClick={resetCalculator}
+              onClick={() => handleClearAllClick(resetCalculator)}
             >
               Clear All
             </button>

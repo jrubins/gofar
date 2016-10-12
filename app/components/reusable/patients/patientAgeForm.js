@@ -1,8 +1,15 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
+
+import { customEvent } from 'utils/ga';
 
 import { getAge } from 'reducers';
 import { ageChanged } from 'actions/age';
+
+const debouncedAgeCustomEvent = _.debounce((age) => {
+  customEvent('Patient Age', 'Entered', age);
+}, 400);
 
 class PatientAgeForm extends React.Component {
   constructor(props) {
@@ -12,7 +19,11 @@ class PatientAgeForm extends React.Component {
   }
 
   handlePatientAgeChange(event) {
-    this.props.ageChanged(event.target.value);
+    const newPatientAge = event.target.value;
+
+    debouncedAgeCustomEvent(newPatientAge);
+
+    this.props.ageChanged(newPatientAge);
   }
 
   render() {

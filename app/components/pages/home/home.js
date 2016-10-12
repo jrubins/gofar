@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import { customEvent } from 'utils/ga';
+
 import { getIsModalOpen } from 'reducers';
 import { toggleModal } from 'actions/modal';
 
@@ -10,6 +12,17 @@ import ScoreOutput from 'components/reusable/output/scoreOutput';
 import Attribution from 'components/reusable/attribution/attribution';
 import FeedbackModal from 'components/reusable/modals/feedback';
 import ModalBackdrop from 'components/reusable/modals/backdrop';
+
+/**
+ * Handles when a user clicks the feedback link.
+ *
+ * @param {Function} toggleModal
+ */
+function handleFeedbackClick(toggleModal) {
+  customEvent('Feedback', 'Opened', 'Modal');
+
+  toggleModal();
+}
 
 const HomePage = ({ toggleModal, isModalOpen }) => (
   <div id="content" className="container">
@@ -53,7 +66,7 @@ const HomePage = ({ toggleModal, isModalOpen }) => (
           <span className="footer-divider hidden-sm hidden-xs"></span>
           <a
             className="hidden-sm hidden-xs"
-            onClick={toggleModal}
+            onClick={() => handleFeedbackClick(toggleModal)}
           >
             Feedback
           </a>

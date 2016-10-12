@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import { customEvent } from 'utils/ga';
+
 import { toggleSymptom } from 'actions/symptoms';
 
 import SymptomInfo from 'components/reusable/symptoms/symptomInfo';
@@ -13,6 +15,10 @@ class Symptom extends React.Component {
   }
 
   handleSymptomToggled() {
+    const { symptom } = this.props;
+
+    customEvent('Symptom', 'Toggled', symptom.label);
+
     this.props.toggleSymptom(this.props.symptom.id);
   }
 
