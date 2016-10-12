@@ -31,13 +31,13 @@ class Symptom extends React.Component {
 
             <div className="componentLabel">
               <span>{symptom.label}</span>
-            </div>
 
-            {symptom.helpText &&
-              <SymptomInfo
-                infoText={symptom.helpText}
-              />
-            }
+              {symptom.helpText &&
+                <SymptomInfo
+                  infoText={symptom.helpText}
+                />
+              }
+            </div>
           </label>
         </div>
       </div>

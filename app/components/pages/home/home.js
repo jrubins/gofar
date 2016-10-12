@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+
+import { getIsModalOpen } from 'reducers';
+import { toggleModal } from 'actions/modal';
 
 import PatientAgeForm from 'components/reusable/patients/patientAgeForm';
 import SymptomsForm from 'components/reusable/symptoms/symptomsForm';
 import ScoreOutput from 'components/reusable/output/scoreOutput';
 import Attribution from 'components/reusable/attribution/attribution';
+import FeedbackModal from 'components/reusable/modals/feedback';
+import ModalBackdrop from 'components/reusable/modals/backdrop';
 
-const HomePage = () => (
+const HomePage = ({ toggleModal, isModalOpen }) => (
   <div id="content" className="container">
     <div className="row">
       <div className="col-md-12">
@@ -47,15 +53,31 @@ const HomePage = () => (
           <span className="black-circle hidden-sm hidden-xs"></span>
           <a
             className="hidden-sm hidden-xs"
-            data-toggle="modal"
-            href="#feedback-modal"
+            onClick={toggleModal}
           >
             Feedback
           </a>
         </div>
       </div>
     </div>
+
+    <FeedbackModal />
+
+    {isModalOpen &&
+      <ModalBackdrop />
+    }
   </div>
 );
 
-export default HomePage;
+HomePage.propTypes = {
+  toggleModal: PropTypes.func.isRequired,
+  isModalOpen: PropTypes.bool.isRequired,
+};
+
+const HomePageContainer = connect(state => ({
+  isModalOpen: getIsModalOpen(state),
+}), {
+  toggleModal,
+})(HomePage);
+
+export default HomePageContainer;
