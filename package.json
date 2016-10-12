@@ -1,7 +1,7 @@
 {
-  "name": "react-boilerplate",
+  "name": "gofar",
   "version": "1.0.0",
-  "description": "Boilerplate for an isomorphic React project.",
+  "description": "GO-FAR score calculator.",
   "author": "Jonathan Rubins",
   "scripts": {
     "lint": "eslint app config server"
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:jrubins/react-boilerplate.git"
+    "url": "git@github.com:jrubins/gofar.git"
   },
   "license": "MIT",
   "dependencies": {
@@ -25,9 +25,7 @@
     "font-awesome": "4.6.3",
     "helmet": "2.1.3",
     "history": "1.17.0",
-    "isomorphic-fetch": "2.2.1",
     "lodash": "4.15.0",
-    "moment": "2.15.0",
     "pm2": "2.0.12",
     "pug": "2.0.0-beta6",
     "react": "15.3.1",
