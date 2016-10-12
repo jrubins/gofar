@@ -82,6 +82,7 @@ class FeedbackModal extends React.Component {
                       type="text"
                       name="entry.468931824"
                       className="form-control"
+                      id="feedback-name"
                     />
                   </div>
                   <div className="form-group">
@@ -90,6 +91,7 @@ class FeedbackModal extends React.Component {
                       type="text"
                       name="entry.455716436"
                       className="form-control"
+                      id="feedback-email"
                     />
                   </div>
                   <div className="form-group">
@@ -98,6 +100,7 @@ class FeedbackModal extends React.Component {
                       rows="6"
                       name="entry.612948227"
                       className="form-control"
+                      id="feedback-text"
                       value={this.state.feedback}
                       onChange={this.handleChangeFeedback}
                     ></textarea>

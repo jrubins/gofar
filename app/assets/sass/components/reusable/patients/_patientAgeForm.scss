@@ -1,0 +1,14 @@
+.patient-age-input-container {
+  padding-left: 8px;
+}
+
+/**
+ * Normal Bootstrap labels are bold, so let's not make this one bold.
+ */
+.patient-age-label {
+  font-weight: normal;
+}
+
+.patient-age-input {
+  margin-left: 10px;
+}

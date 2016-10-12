@@ -12,5 +12,8 @@
 @import 'global/global';
 
 // Reusable component styles.
+@import 'components/reusable/patients/patients';
+@import 'components/reusable/symptoms/symptoms';
 
 // Page styles.
+@import 'components/pages/home/homePage';

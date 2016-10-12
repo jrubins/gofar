@@ -1,0 +1,38 @@
+.symptom-info-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.symptom-info-content-container {
+  position: absolute;
+  z-index: 1;
+  width: 250px;
+  border: 1px solid $grey;
+  left: -125px;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border: 1px solid $grey;
+    transform: rotate(45deg);
+    margin-left: 2px;
+
+    background-color: $white;
+  }
+}
+
+.symptom-info-content {
+  position: relative;
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+
+  background-color: $white;
+}

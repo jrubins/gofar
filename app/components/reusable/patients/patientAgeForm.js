@@ -20,11 +20,11 @@ class PatientAgeForm extends React.Component {
 
     return (
       <form className="col-md-12 form-inline">
-        <div id="patientAgeGroup" className="form-group padding">
-          <label htmlFor="patientAge" id="patientAgeLabel">Patient Age:</label>
+        <div className="form-group patient-age-input-container padding">
+          <label htmlFor="patient-age" className="patient-age-label">Patient Age:</label>
           <input
-            id="patientAge"
-            className="form-control"
+            className="form-control patient-age-input"
+            id="patient-age"
             type="number"
             value={age}
             onChange={this.handlePatientAgeChange}

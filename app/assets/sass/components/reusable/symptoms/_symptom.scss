@@ -1,0 +1,15 @@
+.symptom {
+  .symptom-checkbox {
+    padding-top: 0;
+  }
+
+  .symptom-label {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    /**
+     * Give this 100% width so the user can click anywhere in the component, not just the text of the label.
+     */
+    width: 100%;
+  }
+}

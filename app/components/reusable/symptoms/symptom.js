@@ -20,16 +20,16 @@ class Symptom extends React.Component {
     const { symptom } = this.props;
 
     return (
-      <div className="component col-md-4 col-sm-6 col-xs-12">
-        <div className="checkbox">
-          <label>
+      <div className="symptom col-md-4 col-sm-6 col-xs-12">
+        <div className="symptom-checkbox checkbox">
+          <label className="symptom-label">
             <input
               type="checkbox"
               checked={symptom.selected}
               onChange={this.handleSymptomToggled}
             />
 
-            <div className="componentLabel">
+            <div>
               <span>{symptom.label}</span>
 
               {symptom.helpText &&

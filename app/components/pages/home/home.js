@@ -50,7 +50,7 @@ const HomePage = ({ toggleModal, isModalOpen }) => (
       <div className="col-md-12">
         <div className="footer smaller text-center">
           <span>Jonathan Rubins &copy; 2016</span>
-          <span className="black-circle hidden-sm hidden-xs"></span>
+          <span className="footer-divider hidden-sm hidden-xs"></span>
           <a
             className="hidden-sm hidden-xs"
             onClick={toggleModal}

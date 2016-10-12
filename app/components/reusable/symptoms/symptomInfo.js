@@ -44,7 +44,7 @@ class SymptomInfo extends React.Component {
 
     return (
       <div
-        className="info-text-container"
+        className="symptom-info-container"
         onMouseEnter={this.handleInfoTextMouseEnter}
         onMouseLeave={this.handleInfoTextMouseLeave}
       >
@@ -53,11 +53,11 @@ class SymptomInfo extends React.Component {
         ></i>
 
         <div
-          className={cn('info-text', {
+          className={cn('symptom-info-content-container', {
             hidden: !this.state.showInfoText,
           })}
         >
-          <div className="info-text-content">
+          <div className="symptom-info-content">
             {infoText}
           </div>
         </div>
