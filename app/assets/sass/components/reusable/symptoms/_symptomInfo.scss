@@ -10,21 +10,19 @@
   width: 250px;
   border: 1px solid $grey;
   left: -125px;
+}
 
-  &::before {
-    content: '';
+.symptom-info-arrow-indicator {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border: 1px solid $grey;
+  transform: rotate(45deg);
+  margin-left: 2px;
 
-    position: absolute;
-    top: -4px;
-    left: 50%;
-    width: 8px;
-    height: 8px;
-    border: 1px solid $grey;
-    transform: rotate(45deg);
-    margin-left: 2px;
-
-    background-color: $white;
-  }
+  background-color: $white;
 }
 
 .symptom-info-content {
