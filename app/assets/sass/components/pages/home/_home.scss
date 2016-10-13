@@ -1,0 +1,20 @@
+.gofar-title {
+  @media(max-width: $screen-xs-max) {
+    font-size: 25px;
+  }
+}
+
+.footer {
+  margin: 15px 0;
+}
+
+.footer-divider {
+  display: inline-block;
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  margin: 0 5px;
+  vertical-align: middle;
+
+  background-color: $black;
+}
