@@ -9,10 +9,10 @@ var helmet = require('helmet');
 var favicon = require('serve-favicon');
 var winston = require('winston');
 
-var AppRouteHandlers = require('routeHandlers/appRouteHandlers').default;
-var config = require('buildConfig').default;
-var Constants = require('constants/constants');
-var LogUtil = require('utils/logs');
+var AppRouteHandlers = require('./routeHandlers/appRouteHandlers').default;
+var config = require('../config/buildConfig').default;
+var Constants = require('../app/constants/constants');
+var LogUtil = require('../shared/utils/logs');
 
 // Set up our logger.
 if (process.env.NODE_ENV !== Constants.ENV_DEV) {

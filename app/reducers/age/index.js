@@ -1,7 +1,7 @@
 import {
   AGE_CHANGED,
   RESET_CALCULATOR,
-} from 'actions';
+} from '../../actions';
 
 const initialState = '';
 

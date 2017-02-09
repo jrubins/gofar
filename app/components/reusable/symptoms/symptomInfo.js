@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import _ from 'lodash';
 
-import { customEvent } from 'utils/ga';
-import { offset } from 'utils/dom';
+import { customEvent } from '../../../../shared/utils/ga';
+import { offset } from '../../../../shared/utils/dom';
 
 /**
  * The width of the info text container (in pixels).

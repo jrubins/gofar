@@ -1,4 +1,4 @@
-import { AGE_CHANGED } from 'actions';
+import { AGE_CHANGED } from '../';
 
 /**
  * Indicates the patient age has been changed.

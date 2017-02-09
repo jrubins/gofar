@@ -1,4 +1,4 @@
-import { TOGGLE_MODAL } from 'actions';
+import { TOGGLE_MODAL } from '../';
 
 /**
  * Toggles whether the modal is shown or hidden.

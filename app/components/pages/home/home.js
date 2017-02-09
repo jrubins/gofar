@@ -1,17 +1,17 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { customEvent } from 'utils/ga';
+import { customEvent } from '../../../../shared/utils/ga';
 
-import { getIsModalOpen } from 'reducers';
-import { toggleModal } from 'actions/modal';
+import { getIsModalOpen } from '../../../reducers';
+import { toggleModal } from '../../../actions/modal';
 
-import PatientAgeForm from 'components/reusable/patients/patientAgeForm';
-import SymptomsForm from 'components/reusable/symptoms/symptomsForm';
-import ScoreOutput from 'components/reusable/output/scoreOutput';
-import Attribution from 'components/reusable/attribution/attribution';
-import FeedbackModal from 'components/reusable/modals/feedback';
-import ModalBackdrop from 'components/reusable/modals/backdrop';
+import PatientAgeForm from '../../reusable/patients/patientAgeForm';
+import SymptomsForm from '../../reusable/symptoms/symptomsForm';
+import ScoreOutput from '../../reusable/output/scoreOutput';
+import Attribution from '../../reusable/attribution/attribution';
+import FeedbackModal from '../../reusable/modals/feedback';
+import ModalBackdrop from '../../reusable/modals/backdrop';
 
 /**
  * Handles when a user clicks the feedback link.

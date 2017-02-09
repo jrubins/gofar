@@ -4,8 +4,8 @@ import {
   GA_SCRIPT_URL,
   setupGaTracker,
   initAndSendPageview,
-} from 'utils/ga';
-import { insertScript } from 'utils/scripts';
+} from '../../../../shared/utils/ga';
+import { insertScript } from '../../../../shared/utils/scripts';
 
 export default class GaScript extends React.Component {
   componentDidMount() {

@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { customEvent } from 'utils/ga';
+import { customEvent } from '../../../../shared/utils/ga';
 
-import { toggleSymptom } from 'actions/symptoms';
+import { toggleSymptom } from '../../../actions/symptoms';
 
-import SymptomInfo from 'components/reusable/symptoms/symptomInfo';
+import SymptomInfo from './symptomInfo';
 
 class Symptom extends React.Component {
   constructor(props) {

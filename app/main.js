@@ -4,9 +4,9 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory, applyRouterMiddleware } from 'react-router';
 import useScroll from 'react-router-scroll/lib/useScroll';
 
-import { setLogger } from 'utils/logs';
-import configureStore from 'store/configureStore';
-import routes from 'routes';
+import { setLogger } from '../shared/utils/logs';
+import configureStore from './store/configureStore';
+import routes from './routes';
 
 // Set our logger to be the browser console.
 setLogger(console);

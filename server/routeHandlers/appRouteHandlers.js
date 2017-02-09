@@ -3,8 +3,8 @@ import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { match, RouterContext } from 'react-router';
 
-import configureStore from 'store/configureStore';
-import routes from 'routes';
+import configureStore from '../../app/store/configureStore';
+import routes from '../../app/routes';
 
 export default function appRouteHandlers(app) {
   // We use React Router to decide which component to show for which route.

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 
-import age, * as fromAge from 'reducers/age';
-import modal, * as fromModal from 'reducers/modal';
-import symptoms, * as fromSymptoms from 'reducers/symptoms';
+import age, * as fromAge from './age';
+import modal, * as fromModal from './modal';
+import symptoms, * as fromSymptoms from './symptoms';
 
 export default combineReducers({
   age,

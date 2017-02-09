@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { getSymptoms } from 'reducers';
+import { getSymptoms } from '../../../reducers';
 
-import Symptom from 'components/reusable/symptoms/symptom';
+import Symptom from './symptom';
 
 const SymptomsForm = ({ symptoms }) => (
   <form id="components" className="form-horizontal">

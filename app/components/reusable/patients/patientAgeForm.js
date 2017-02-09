@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { customEvent } from 'utils/ga';
+import { customEvent } from '../../../../shared/utils/ga';
 
-import { getAge } from 'reducers';
-import { ageChanged } from 'actions/age';
+import { getAge } from '../../../reducers';
+import { ageChanged } from '../../../actions/age';
 
 const debouncedAgeCustomEvent = _.debounce((age) => {
   customEvent('Patient Age', 'Entered', age);

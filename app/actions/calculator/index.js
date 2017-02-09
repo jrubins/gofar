@@ -1,4 +1,4 @@
-import { RESET_CALCULATOR } from 'actions';
+import { RESET_CALCULATOR } from '../';
 
 /**
  * Resets the state of the calculator.

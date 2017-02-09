@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import GaScript from 'components/reusable/scripts/ga';
+import GaScript from './reusable/scripts/ga';
 
 const App = ({ children }) => (
   <div className="app-container">

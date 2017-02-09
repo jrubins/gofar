@@ -1,4 +1,4 @@
-import { ENV_DEV } from 'constants/constants';
+import { ENV_DEV } from '../../../app/constants/constants';
 
 /**
  * The tracker name for the global GA object for pushing events.

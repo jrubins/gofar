@@ -1,4 +1,4 @@
-import { TOGGLE_SYMPTOM } from 'actions';
+import { TOGGLE_SYMPTOM } from '../';
 
 /**
  * Toggles whether or not a symptom is selected.

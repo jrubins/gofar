@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { customEvent } from 'utils/ga';
+import { customEvent } from '../../../../shared/utils/ga';
 
 /**
  * Handles clicks on the attribution link.

@@ -1,20 +1,20 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { customEvent } from 'utils/ga';
+import { customEvent } from '../../../../shared/utils/ga';
 import {
   calculatePointsFromAge,
   calculateProbabilityFromPoints,
-} from 'utils/points';
+} from '../../../../shared/utils/points';
 
 import {
   getAge,
   getSymptomPoints,
   getNumSymptomsSelected,
-} from 'reducers';
+} from '../../../reducers';
 import {
   resetCalculator,
-} from 'actions/calculator';
+} from '../../../actions/calculator';
 
 /**
  * Handles when a user clicks the "Clear All" button on the calculator.

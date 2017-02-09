@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import cn from 'classnames';
 import _ from 'lodash';
 
-import { customEvent } from 'utils/ga';
+import { customEvent } from '../../../../shared/utils/ga';
 
-import { getIsModalOpen } from 'reducers';
-import { toggleModal } from 'actions/modal';
+import { getIsModalOpen } from '../../../reducers';
+import { toggleModal } from '../../../actions/modal';
 
 class FeedbackModal extends React.Component {
   constructor(props) {

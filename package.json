@@ -4,7 +4,8 @@
   "description": "GO-FAR score calculator.",
   "author": "Jonathan Rubins",
   "scripts": {
-    "lint": "eslint app config server"
+    "lint": "eslint app config server",
+    "start": "yarn && gulp"
   },
   "pre-commit": [
     "lint"
@@ -52,6 +53,7 @@
     "eslint-plugin-react": "6.4.1",
     "gulp": "3.9.1",
     "gulp-autoprefixer": "3.1.1",
+    "gulp-cli": "1.2.2",
     "gulp-live-server": "0.0.30",
     "gulp-sass": "2.3.2",
     "gulp-uglify": "2.0.0",

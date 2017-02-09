@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {
   TOGGLE_SYMPTOM,
   RESET_CALCULATOR,
-} from 'actions';
+} from '../../actions';
 
 const initialSymptomData = [
   {
