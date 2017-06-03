@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "go-far-d24fc",
+    "production": "go-far-d24fc"
+  }
+}
