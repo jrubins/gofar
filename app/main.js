@@ -1,22 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router, browserHistory, applyRouterMiddleware } from 'react-router';
-import useScroll from 'react-router-scroll/lib/useScroll';
+import { AppContainer } from 'react-hot-loader';
 
-import { setLogger } from '../shared/utils/logs';
 import configureStore from './store/configureStore';
-import routes from './routes';
 
-// Set our logger to be the browser console.
-setLogger(console);
+import Root from './root';
 
-ReactDOM.render(
-  <Provider store={configureStore(window.__INITIAL_STATE__)}>
-    <Router
-      history={browserHistory}
-      routes={routes}
-      render={applyRouterMiddleware(useScroll())}
-    />
-  </Provider>
-, document.getElementById('app'));
+const store = configureStore();
+
+/**
+ * Renders our React root wrapped with a hot-reloading component (NOTE: That component is a no-op in prod).
+ */
+const render = () => {
+  ReactDOM.render(
+    <AppContainer>
+      <Root
+        store={store}
+      />
+    </AppContainer>
+  , document.getElementById('app'));
+};
+render();
+
+// Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./root', () => {
+    render();
+  });
+}
