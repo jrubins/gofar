@@ -64,7 +64,7 @@ const ScoreOutput = ({ age, numSymptomsSelected, resetCalculator, symptomPoints 
           <td className="score-output-table-clear">
             <Button
               handleClick={() => handleClearAllClick(resetCalculator)}
-              isDisabled={clearAllBtnDisabled ? 'disabled' : null}
+              isDisabled={clearAllBtnDisabled}
             >
               Clear All
             </Button>
