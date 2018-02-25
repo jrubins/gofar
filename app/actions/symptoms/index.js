@@ -1,4 +1,4 @@
-import { TOGGLE_SYMPTOM } from '../';
+import { TOGGLE_SYMPTOM } from '../'
 
 /**
  * Toggles whether or not a symptom is selected.
@@ -8,7 +8,7 @@ import { TOGGLE_SYMPTOM } from '../';
  */
 export function toggleSymptom(symptomId) {
   return {
-    type: TOGGLE_SYMPTOM,
     symptomId,
-  };
+    type: TOGGLE_SYMPTOM,
+  }
 }

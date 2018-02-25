@@ -1,0 +1,12 @@
+[build]
+  publish = "dist"
+  command = "yarn build"
+
+[context.production]
+  [context.production.environment]
+    APP_ENV="production"
+    GA_PROPERTY="UA-60588544-1"
+    INSPECTLET_APP_ID="762599318"
+    NODE_ENV="production"
+    YARN_FLAGS="--production=false"
+    YARN_VERSION="1.3.2"

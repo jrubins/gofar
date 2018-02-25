@@ -1,0 +1,18 @@
+.overlay-close {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  height: 50px;
+
+  cursor: pointer;
+
+  .icon-close {
+    width: 10px;
+    height: 10px;
+  }
+}

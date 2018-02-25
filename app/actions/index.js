@@ -1,11 +1,12 @@
-// Age actions.
-export const AGE_CHANGED = 'AGE_CHANGED';
+// Age action types.
+export const AGE_CHANGED = 'AGE_CHANGED'
 
-// Symptoms actions.
-export const TOGGLE_SYMPTOM = 'TOGGLE_SYMPTOM';
+// Calculator action types.
+export const RESET_CALCULATOR = 'RESET_CALCULATOR'
 
-// Calculator actions.
-export const RESET_CALCULATOR = 'RESET_CALCULATOR';
+// Modal action types.
+export const CLOSE_MODAL = 'CLOSE_MODAL'
+export const OPEN_MODAL = 'OPEN_MODAL'
 
-// Modal actions.
-export const TOGGLE_MODAL = 'TOGGLE_MODAL';
+// Symptoms action types.
+export const TOGGLE_SYMPTOM = 'TOGGLE_SYMPTOM'

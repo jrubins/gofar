@@ -1,15 +1,28 @@
 .symptom {
   .symptom-checkbox {
+    position: relative;
+
+    min-height: 27px;
     padding-top: 0;
+
+    input {
+      position: absolute;
+
+      margin: 4px 0 0 -20px;
+    }
   }
 
   .symptom-label {
-    padding-top: 10px;
-    padding-bottom: 10px;
-
     /**
      * Give this 100% width so the user can click anywhere in the component, not just the text of the label.
      */
     width: 100%;
+    min-height: 20px;
+    margin-bottom: 0;
+    padding: 10px 0 10px 20px;
+
+    font-weight: normal;
+
+    cursor: pointer;
   }
 }

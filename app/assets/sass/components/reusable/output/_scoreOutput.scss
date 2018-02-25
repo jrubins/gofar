@@ -1,0 +1,17 @@
+.score-output-table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  td {
+    padding: 8px;
+    border-top: 1px solid $grey;
+  }
+}
+
+.score-output-table-clear {
+  text-align: right;
+}
