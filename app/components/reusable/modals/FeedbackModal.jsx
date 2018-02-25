@@ -142,12 +142,14 @@ class FeedbackModal extends Component {
           </div>
 
           <div className="modal-footer">
-            <Button
-              isDisabled={isFormSubmitted || _.isEmpty(_.trim(feedback))}
-              type="submit"
-            >
-              Submit
-            </Button>
+            {!isFormSubmitted &&
+              <Button
+                isDisabled={_.isEmpty(_.trim(feedback))}
+                type="submit"
+              >
+                Submit
+              </Button>
+            }
           </div>
         </form>
       </div>
