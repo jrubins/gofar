@@ -1,22 +1,20 @@
 import {
   AGE_CHANGED,
   RESET_CALCULATOR,
-} from '../../actions';
+} from '../../actions'
 
-const initialState = '';
-
-export default function age(state = initialState, action) {
+export default function age(state = '', action) {
   switch (action.type) {
     case AGE_CHANGED:
-      return action.age;
+      return action.age
 
     case RESET_CALCULATOR:
-      return initialState;
+      return ''
 
     default:
-      return state;
+      return state
   }
 }
 
 // Selectors.
-export const getAge = state => state;
+export const getAge = state => state

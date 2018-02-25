@@ -1,8 +1,94 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
 
+  background-color: $white;
+  color: $mine-shaft;
+  font-family: $font-face;
+  font-size: 14px;
+  line-height: $base-line-height;
+
   -webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 12px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+h4,
+h5,
+h6 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  font-size: 12px;
+}
+
+label {
+  display: inline-block;
+
+  max-width: 100%;
+  margin-bottom: 5px;
+
+  font-weight: bold;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+// This removes the shadowing that iOS Safari puts on inputs.
+input[type='text'] { // sass-lint:disable-line no-qualifying-elements
+  appearance: none;
 }
 
 p {
@@ -10,13 +96,20 @@ p {
 }
 
 a {
+  color: $astral;
+
+  text-decoration: none;
+
   cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: $astral-dark;
+
+    text-decoration: underline;
+  }
 }
 
-.padding {
-  padding: 15px;
-}
-
-.smaller {
-  font-size: 12px;
+.hidden {
+  display: none !important; // sass-lint:disable-line no-important
 }

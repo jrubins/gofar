@@ -1,9 +1,9 @@
-const DotenvPlugin = require('webpack-dotenv-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
-const buildConfig = require('./buildConfig');
+const buildConfig = require('./buildConfig')
 
 module.exports = {
   bail: true,
@@ -12,6 +12,7 @@ module.exports = {
     main: buildConfig.paths.app.mainJs,
   },
   output: {
+    chunkFilename: 'js/[name].[chunkhash].js',
     filename: 'js/[name].[chunkhash].js',
     path: buildConfig.paths.dist,
     publicPath: '/',
@@ -42,10 +43,14 @@ module.exports = {
     ],
   },
   plugins: [
-    new DotenvPlugin({
-      sample: '.env',
-      path: '.env',
-    }),
+    // This is a shorthand plugin for the DefinePlugin.
+    new webpack.EnvironmentPlugin([
+      'APP_ENV',
+      'GA_PROPERTY',
+      'INSPECTLET_APP_ID',
+      'NODE_ENV',
+    ]),
+
     new HtmlWebpackPlugin({
       favicon: buildConfig.paths.app.favicon,
       template: buildConfig.paths.app.html,
@@ -55,12 +60,13 @@ module.exports = {
     // will cache-bust the vendor bundle.
     new webpack.HashedModuleIdsPlugin(),
 
+    // Enable scope-hoisting.
+    new webpack.optimize.ModuleConcatenationPlugin(),
+
     // This makes our vendor bundle from node_modules modules.
     new webpack.optimize.CommonsChunkPlugin({
+      minChunks: module => module.context && module.context.indexOf('node_modules') !== -1,
       name: 'vendor',
-      minChunks(module) {
-        return module.context && module.context.indexOf('node_modules') !== -1;
-      },
     }),
 
     // This ensures that our vendor bundle name doesn't change between builds (unless the vendor contents change)
@@ -85,6 +91,10 @@ module.exports = {
     }),
 
     new ExtractTextPlugin('css/[name].[contenthash].css'),
+
+    new CopyWebpackPlugin([{
+      from: './_redirects',
+    }]),
   ],
   resolve: {
     modules: [
@@ -96,4 +106,4 @@ module.exports = {
       '.jsx',
     ],
   },
-};
+}

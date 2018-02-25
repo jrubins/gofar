@@ -7,21 +7,21 @@
  * @param {String} [opts.async]
  */
 export function insertScript(opts) {
-  const { id, src, async = true } = opts;
+  const { id, src, async = true } = opts
 
   if (document.getElementById(id)) {
-    return;
+    return
   }
 
-  const scriptEl = document.createElement('script');
-  scriptEl.id = id;
-  scriptEl.src = src;
+  const scriptEl = document.createElement('script')
+  scriptEl.id = id
+  scriptEl.src = src
   if (async) {
-    scriptEl.async = 1;
+    scriptEl.async = 1
   }
 
-  const firstJsEl = document.getElementsByTagName('script')[0];
-  firstJsEl.parentNode.insertBefore(scriptEl, firstJsEl);
+  const firstJsEl = document.getElementsByTagName('script')[0]
+  firstJsEl.parentNode.insertBefore(scriptEl, firstJsEl)
 }
 
 
@@ -32,19 +32,19 @@ export function insertScript(opts) {
  * @returns {{top: Number, left: Number}}
  */
 export function offset(el) {
-  const box = el.getBoundingClientRect();
+  const box = el.getBoundingClientRect()
 
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-  const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft;
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+  const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft
 
-  const clientTop = document.documentElement.clientTop || document.body.clientTop || 0;
-  const clientLeft = document.documentElement.clientLeft || document.body.clientLeft || 0;
+  const clientTop = document.documentElement.clientTop || document.body.clientTop || 0
+  const clientLeft = document.documentElement.clientLeft || document.body.clientLeft || 0
 
-  const top = box.top + scrollTop - clientTop;
-  const left = box.left + scrollLeft - clientLeft;
+  const top = box.top + scrollTop - clientTop
+  const left = box.left + scrollLeft - clientLeft
 
   return {
     top: Math.round(top),
     left: Math.round(left),
-  };
+  }
 }

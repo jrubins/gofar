@@ -1,14 +1,41 @@
-import { TOGGLE_MODAL } from '../../actions';
+import { combineReducers } from 'redux'
 
-export default function modal(state = false, action) {
+import {
+  CLOSE_MODAL,
+  OPEN_MODAL,
+} from '../../actions'
+
+function open(state = false, action) {
   switch (action.type) {
-    case TOGGLE_MODAL:
-      return !state;
+    case CLOSE_MODAL:
+      return false
+
+    case OPEN_MODAL:
+      return true
 
     default:
-      return state;
+      return state
   }
 }
 
+function opts(state = {}, action) {
+  switch (action.type) {
+    case CLOSE_MODAL:
+      return {}
+
+    case OPEN_MODAL:
+      return action.opts
+
+    default:
+      return state
+  }
+}
+
+export default combineReducers({
+  open,
+  opts,
+})
+
 // Selectors.
-export const getIsModalOpen = state => state;
+export const getModalOpts = state => state.opts
+export const isModalOpen = state => state.open

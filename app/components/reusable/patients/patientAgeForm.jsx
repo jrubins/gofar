@@ -1,61 +1,69 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import _ from 'lodash';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import _ from 'lodash'
 
-import { customEvent } from '../../../utils/ga';
+import { customEvent } from '../../../utils/analytics'
 
-import { getAge } from '../../../reducers';
-import { ageChanged } from '../../../actions/age';
+import { getAge } from '../../../reducers'
+import { ageChanged } from '../../../actions/age'
 
-const debouncedAgeCustomEvent = _.debounce((age) => {
-  customEvent('Patient Age', 'Entered', age);
-}, 400);
+import FormGroup from '../forms/FormGroup'
+import Input from '../forms/fields/Input'
+
+const debouncedAgeCustomEvent = _.debounce(age => {
+  customEvent('Patient Age', 'Entered', age)
+}, 400)
 
 class PatientAgeForm extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.handlePatientAgeChange = this.handlePatientAgeChange.bind(this);
+    this.handlePatientAgeChange = this.handlePatientAgeChange.bind(this)
   }
 
-  handlePatientAgeChange(event) {
-    const newPatientAge = event.target.value;
+  /**
+   * Handles the user changing the patient age.
+   *
+   * @param {String} newPatientAge
+   */
+  handlePatientAgeChange(newPatientAge) {
+    debouncedAgeCustomEvent(newPatientAge)
 
-    debouncedAgeCustomEvent(newPatientAge);
-
-    this.props.ageChanged(newPatientAge);
+    this.props.ageChanged(newPatientAge)
   }
 
   render() {
-    const { age } = this.props;
+    const { age } = this.props
 
     return (
-      <form className="col-md-12 form-inline">
-        <div className="form-group patient-age-input-container padding">
-          <label htmlFor="patient-age" className="patient-age-label">Patient Age:</label>
-          <input
-            className="form-control patient-age-input"
+      <form className="patient-age-form">
+        <FormGroup>
+          <label htmlFor="patient-age">
+            Patient Age:
+          </label>
+          <Input
+            handleChange={this.handlePatientAgeChange}
             id="patient-age"
+            name="patient-age"
             type="number"
             value={age}
-            onChange={this.handlePatientAgeChange}
           />
-        </div>
+        </FormGroup>
       </form>
-    );
+    )
   }
 }
 
 PatientAgeForm.propTypes = {
-  ageChanged: PropTypes.func.isRequired,
   age: PropTypes.string.isRequired,
-};
+  ageChanged: PropTypes.func.isRequired,
+}
 
 const PatientAgeFormContainer = connect(state => ({
   age: getAge(state),
 }), {
   ageChanged,
-})(PatientAgeForm);
+})(PatientAgeForm)
 
-export default PatientAgeFormContainer;
+export default PatientAgeFormContainer

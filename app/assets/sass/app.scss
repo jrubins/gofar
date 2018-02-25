@@ -1,6 +1,3 @@
-// Vendor styles.
-@import 'vendor/bootstrap';
-
 // Import our variables.
 @import 'global/variables';
 
@@ -8,8 +5,7 @@
 @import 'global/global';
 
 // Reusable component styles.
-@import 'components/reusable/patients/patients';
-@import 'components/reusable/symptoms/symptoms';
+@import 'components/reusable/reusable';
 
 // Page styles.
-@import 'components/pages/home/homePage';
+@import 'components/pages/pages';

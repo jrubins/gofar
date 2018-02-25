@@ -1,30 +1,34 @@
-import React from 'react';
+import { Component } from 'react'
 
 import {
-  INSPECTLET_SCRIPT_URL,
-  setupInspectlet,
-} from '../../../utils/inspectlet';
-import { insertScript } from '../../../utils/dom';
-import { isDevelopment } from '../../../utils/environment';
+  ANALYTICS_LIBS,
+  setupAnalytics,
+} from '../../../utils/analytics'
+import { insertScript } from '../../../utils/dom'
+import {
+  isDevelopment,
+} from '../../../utils/environment'
 
-export default class InspectletScript extends React.Component {
+class Inspectlet extends Component {
   componentDidMount() {
     // Don't want to record any local sessions.
     if (!isDevelopment()) {
-      setupInspectlet();
+      setupAnalytics(ANALYTICS_LIBS.INSPECTLET)
 
       insertScript({
-        id: 'inspsync',
-        src: `${'https:' === document.location.protocol ? 'https' : 'http'}${INSPECTLET_SCRIPT_URL}`,
-      });
+        id: 'inspectlet',
+        src: `https://cdn.inspectlet.com/inspectlet.js?wid=${process.env.INSPECTLET_APP_ID}&r=${Math.floor(new Date().getTime() / 3600000)}`,
+      })
     }
   }
 
   shouldComponentUpdate() {
-    return false;
+    return false
   }
 
   render() {
-    return null;
+    return null
   }
 }
+
+export default Inspectlet

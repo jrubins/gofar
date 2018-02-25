@@ -1,15 +1,23 @@
-# Builds
-dist
-stats.json
-
-# Cache
-.cache
-.DS_Store
+# Caches.
+.babel-cache
 .eslintcache
+.jest-cache
 .tmp
 
-# Logging
-*.log
+# Database
+db
 
-# Vendor
+# Dependencies.
 node_modules
+
+# Builds.
+dist
+
+# Logs
+.yarn-error.log
+npm-debug.log
+
+# Computer specific files.
+.DS_Store
+.env
+.idea

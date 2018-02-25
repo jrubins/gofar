@@ -1,4 +1,4 @@
-import { RESET_CALCULATOR } from '../';
+import { RESET_CALCULATOR } from '../'
 
 /**
  * Resets the state of the calculator.
@@ -8,5 +8,5 @@ import { RESET_CALCULATOR } from '../';
 export function resetCalculator() {
   return {
     type: RESET_CALCULATOR,
-  };
+  }
 }

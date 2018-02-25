@@ -1,0 +1,15 @@
+.symptoms-form {
+  display: flex;
+  flex-wrap: wrap;
+
+  margin-bottom: 15px;
+
+  .form-group {
+    width: 33.33%;
+    padding: 0 15px;
+
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+    }
+  }
+}

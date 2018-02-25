@@ -1,12 +1,28 @@
-import { TOGGLE_MODAL } from '../';
+import {
+  CLOSE_MODAL,
+  OPEN_MODAL,
+} from '../'
 
 /**
- * Toggles whether the modal is shown or hidden.
+ * Closes the modal.
  *
  * @returns {Object}
  */
-export function toggleModal() {
+export function closeModal() {
   return {
-    type: TOGGLE_MODAL,
-  };
+    type: CLOSE_MODAL,
+  }
+}
+
+/**
+ * Opens the modal. The type should be specified in the options.
+ *
+ * @param {Object} opts
+ * @returns {Object}
+ */
+export function openModal(opts) {
+  return {
+    opts,
+    type: OPEN_MODAL,
+  }
 }

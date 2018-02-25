@@ -1,32 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import { getSymptoms } from '../../../reducers';
+import { getSymptoms } from '../../../reducers'
 
-import Symptom from './symptom';
+import FormGroup from '../forms/FormGroup'
+import Symptom from './Symptom'
 
 const SymptomsForm = ({ symptoms }) => (
-  <form id="components" className="form-horizontal">
-    <div className="form-group">
-      {symptoms.map(symptom => (
+  <form className="symptoms-form">
+    {symptoms.map(symptom => (
+      <FormGroup key={symptom.id}>
         <Symptom
-          key={symptom.id}
           symptom={symptom}
         />
-      ))}
-    </div>
+      </FormGroup>
+    ))}
   </form>
-);
+)
 
 SymptomsForm.propTypes = {
   symptoms: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
   })),
-};
+}
 
-const SymptomsFormContainer = connect((state) => ({
+export default connect(state => ({
   symptoms: getSymptoms(state),
-}))(SymptomsForm);
-
-export default SymptomsFormContainer;
+}))(SymptomsForm)

@@ -1,9 +1,9 @@
-import _ from 'lodash';
+import _ from 'lodash'
 
 import {
-  TOGGLE_SYMPTOM,
   RESET_CALCULATOR,
-} from '../../actions';
+  TOGGLE_SYMPTOM,
+} from '../../actions'
 
 const initialSymptomData = [
   {
@@ -56,8 +56,8 @@ const initialSymptomData = [
     label: 'Hypotension or hypoperfusion',
     points: 5,
     helpText: 'Any evidence of hypotension within 4 h of the event, defined as any of the following: ' +
-      'SBP <90 or MAP <60 mm Hg; vasopressor or inotropic requirement after volume expansion (except for ' +
-      'dopamine <= 3 microgram/kg/min); or intra-aortic balloon pump',
+      'SBP <90 or MAP <60 mm Hg vasopressor or inotropic requirement after volume expansion (except for ' +
+      'dopamine <= 3 microgram/kg/min) or intra-aortic balloon pump',
     selected: false,
   },
   {
@@ -74,9 +74,9 @@ const initialSymptomData = [
     points: 4,
     helpText: 'Evidence of acute or chronic respiratory insufficiency within 4 h of the event, ' +
       'defined as any of the following: PaO2/FiO2 ratio <300, PaO2 <60 mm Hg, or SaO2 <90% (without ' +
-      'preexisting cyanotic heartdisease); PaCO2, ETCO2, or TcCO2 >50 mm Hg; spontaneous respiratory ' +
-      'rate >40/min or <5/min; requirement for noninvasive ventilation (eg, bag-valve mask, mask CPAP ' +
-      'or BiPAP, nasal CPAP or BiPAP), or negative pressure ventilation; or requirement for ventilation ' +
+      'preexisting cyanotic heartdisease) PaCO2, ETCO2, or TcCO2 >50 mm Hg spontaneous respiratory ' +
+      'rate >40/min or <5/min requirement for noninvasive ventilation (eg, bag-valve mask, mask CPAP ' +
+      'or BiPAP, nasal CPAP or BiPAP), or negative pressure ventilation or requirement for ventilation ' +
       'via invasive airway',
     selected: false,
   },
@@ -103,32 +103,32 @@ const initialSymptomData = [
     points: 7,
     selected: false,
   },
-];
+]
 
 export default function symptoms(state = initialSymptomData, action) {
   switch (action.type) {
     case TOGGLE_SYMPTOM: {
-      const newSymptoms = _.cloneDeep(state);
-      const symptomToToggle = _.find(newSymptoms, { id: action.symptomId });
-      symptomToToggle.selected = !symptomToToggle.selected;
+      const newSymptoms = _.cloneDeep(state)
+      const symptomToToggle = _.find(newSymptoms, { id: action.symptomId })
+      symptomToToggle.selected = !symptomToToggle.selected
 
-      return newSymptoms;
+      return newSymptoms
     }
 
     case RESET_CALCULATOR:
       return _.map(state, symptom => ({
         ...symptom,
         selected: false,
-      }));
+      }))
 
     default:
-      return state;
+      return state
   }
 }
 
 // Selectors.
-export const getSymptoms = state => state;
-export const getNumSymptomsSelected = state => _.filter(state, { selected: true }).length;
+export const getNumSymptomsSelected = state => _.filter(state, { selected: true }).length
 export const getSymptomPoints = state => (
   _.reduce(state, (points, symptom) => points + (symptom.selected ? symptom.points : 0), 0)
-);
+)
+export const getSymptoms = state => state

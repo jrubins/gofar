@@ -1,4 +1,4 @@
-import { AGE_CHANGED } from '../';
+import { AGE_CHANGED } from '../'
 
 /**
  * Indicates the patient age has been changed.
@@ -8,7 +8,7 @@ import { AGE_CHANGED } from '../';
  */
 export function ageChanged(age) {
   return {
-    type: AGE_CHANGED,
     age,
-  };
+    type: AGE_CHANGED,
+  }
 }

@@ -1,30 +1,29 @@
-import React from 'react';
+import { Component } from 'react'
 
 import {
-  GA_SCRIPT_URL,
-  setupGaTracker,
-  initAndSendPageview,
-} from '../../../utils/ga';
-import { insertScript } from '../../../utils/dom';
+  ANALYTICS_LIBS,
+  setupAnalytics,
+} from '../../../utils/analytics'
+import { insertScript } from '../../../utils/dom'
 
-export default class GaScript extends React.Component {
+class Ga extends Component {
   componentDidMount() {
-    setupGaTracker();
-
-    initAndSendPageview();
+    // Setup our analytics data BEFORE we insert the actual script onto the DOM.
+    setupAnalytics(ANALYTICS_LIBS.GA)
 
     insertScript({
-      id: 'ga-js',
-      src: GA_SCRIPT_URL,
-      async: true,
-    });
+      id: 'ga-sdk',
+      src: 'https://www.google-analytics.com/analytics.js',
+    })
   }
 
   shouldComponentUpdate() {
-    return false;
+    return false
   }
 
   render() {
-    return null;
+    return null
   }
 }
+
+export default Ga

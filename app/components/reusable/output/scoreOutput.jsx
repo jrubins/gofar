@@ -1,21 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import { customEvent } from '../../../utils/ga';
 import {
   calculatePointsFromAge,
   calculateProbabilityFromPoints,
-} from '../../../utils/points';
+} from '../../../utils/points'
+import { customEvent } from '../../../utils/analytics'
 
 import {
   getAge,
-  getSymptomPoints,
   getNumSymptomsSelected,
-} from '../../../reducers';
+  getSymptomPoints,
+} from '../../../reducers'
 import {
   resetCalculator,
-} from '../../../actions/calculator';
+} from '../../../actions/calculator'
+
+import Button from '../forms/fields/Button'
 
 /**
  * Handles when a user clicks the "Clear All" button on the calculator.
@@ -23,9 +25,9 @@ import {
  * @param {Function} resetCalculator
  */
 function handleClearAllClick(resetCalculator) {
-  customEvent('Clear All', 'Clicked');
+  customEvent('Clear All', 'Clicked')
 
-  resetCalculator();
+  resetCalculator()
 }
 
 /**
@@ -33,58 +35,57 @@ function handleClearAllClick(resetCalculator) {
  *
  * @type {Number}
  */
-const INITIAL_SYMPTOM_POINTS = -15;
+const INITIAL_SYMPTOM_POINTS = -15
 
-const ScoreOutput = ({ age, symptomPoints, numSymptomsSelected, resetCalculator }) => {
-  const totalPoints = calculatePointsFromAge(age) + INITIAL_SYMPTOM_POINTS + symptomPoints;
-  const probability = calculateProbabilityFromPoints(totalPoints);
-
-  const clearAllBtnDisabled = (numSymptomsSelected === 0 && age === '');
+const ScoreOutput = ({ age, numSymptomsSelected, resetCalculator, symptomPoints }) => {
+  const totalPoints = calculatePointsFromAge(age) + INITIAL_SYMPTOM_POINTS + symptomPoints
+  const probability = calculateProbabilityFromPoints(totalPoints)
+  const clearAllBtnDisabled = (numSymptomsSelected === 0 && age === '')
 
   return (
-    <table className="table">
+    <table className="score-output-table">
       <tbody>
         <tr>
-          <td className="smaller col-md-4 col-xs-4">GO-FAR Score:</td>
-          <td className="smaller col-md-2 text-center col-xs-2"><b><span>{totalPoints}</span></b></td>
+          <td>GO-FAR Score:</td>
+          <td>
+            <strong>{totalPoints}</strong>
+          </td>
         </tr>
         <tr>
-          <td className="col-md-4 col-xs-4">
+          <td>
             Probability of survival to discharge with good neurologic status following CPR for in-hospital arrest:
           </td>
-          <td className="col-md-2 text-center col-xs-2"><b><span>{probability}</span></b></td>
+          <td>
+            <strong>{probability}</strong>
+          </td>
         </tr>
         <tr>
           <td></td>
-          <td className="text-right">
-            <button
-              className="btn btn-info"
-              type="button"
-              disabled={clearAllBtnDisabled ? 'disabled' : null}
-              onClick={() => handleClearAllClick(resetCalculator)}
+          <td className="score-output-table-clear">
+            <Button
+              handleClick={() => handleClearAllClick(resetCalculator)}
+              isDisabled={clearAllBtnDisabled ? 'disabled' : null}
             >
               Clear All
-            </button>
+            </Button>
           </td>
         </tr>
       </tbody>
     </table>
-  );
-};
+  )
+}
 
 ScoreOutput.propTypes = {
-  resetCalculator: PropTypes.func.isRequired,
   age: PropTypes.string.isRequired,
-  symptomPoints: PropTypes.number.isRequired,
   numSymptomsSelected: PropTypes.number.isRequired,
-};
+  resetCalculator: PropTypes.func.isRequired,
+  symptomPoints: PropTypes.number.isRequired,
+}
 
-const ScoreOutputContainer = connect(state => ({
+export default connect(state => ({
   age: getAge(state),
-  symptomPoints: getSymptomPoints(state),
   numSymptomsSelected: getNumSymptomsSelected(state),
+  symptomPoints: getSymptomPoints(state),
 }), {
   resetCalculator,
-})(ScoreOutput);
-
-export default ScoreOutputContainer;
+})(ScoreOutput)

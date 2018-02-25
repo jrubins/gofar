@@ -1,0 +1,48 @@
+.modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  width: 800px;
+  max-width: 100%;
+  margin: 20px 0;
+  transform: translateX(-50%);
+  background-color: $white;
+  box-shadow: $modal-box-shadow;
+
+  z-index: $zindex-modal;
+
+  @media (max-width: $screen-xs-max) {
+    width: 100%;
+    margin: 0;
+  }
+
+  .modal-open & {
+    display: block;
+  }
+
+  .close-icon-path {
+    stroke: $hit-gray;
+    stroke-width: 5px;
+  }
+}
+
+.modal-open {
+  .overlay {
+    display: block;
+
+    z-index: $zindex-modal;
+  }
+}
+
+.modal-content {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 40px 60px;
+
+  @media (max-width: $screen-xs-max) {
+    width: 100%;
+    padding: 40px;
+  }
+}

@@ -1,39 +1,45 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import { customEvent } from '../../../utils/ga';
+import { customEvent } from '../../../utils/analytics'
 
-import { toggleSymptom } from '../../../actions/symptoms';
+import { toggleSymptom } from '../../../actions/symptoms'
 
-import SymptomInfo from './symptomInfo';
+import SymptomInfo from './SymptomInfo'
 
 class Symptom extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.handleSymptomToggled = this.handleSymptomToggled.bind(this);
+    this.handleSymptomToggled = this.handleSymptomToggled.bind(this)
   }
 
+  /**
+   * Handles when the user toggles a symptom.
+   */
   handleSymptomToggled() {
-    const { symptom } = this.props;
+    const {
+      symptom,
+      toggleSymptom,
+    } = this.props
 
-    customEvent('Symptom', 'Toggled', symptom.label);
+    customEvent('Symptom', 'Toggled', symptom.label)
 
-    this.props.toggleSymptom(this.props.symptom.id);
+    toggleSymptom(symptom.id)
   }
 
   render() {
-    const { symptom } = this.props;
+    const { symptom } = this.props
 
     return (
-      <div className="symptom col-md-4 col-sm-6 col-xs-12">
-        <div className="symptom-checkbox checkbox">
+      <div className="symptom">
+        <div className="symptom-checkbox">
           <label className="symptom-label">
             <input
-              type="checkbox"
               checked={symptom.selected}
               onChange={this.handleSymptomToggled}
+              type="checkbox"
             />
 
             <div>
@@ -48,7 +54,7 @@ class Symptom extends React.Component {
           </label>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -61,10 +67,8 @@ Symptom.propTypes = {
     selected: PropTypes.bool.isRequired,
     helpText: PropTypes.string,
   }),
-};
+}
 
-const SymptomContainer = connect(null, {
+export default connect(null, {
   toggleSymptom,
-})(Symptom);
-
-export default SymptomContainer;
+})(Symptom)

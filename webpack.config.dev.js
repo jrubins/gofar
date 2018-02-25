@@ -1,8 +1,9 @@
-const DotenvPlugin = require('webpack-dotenv-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const DotenvPlugin = require('webpack-dotenv-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
-const buildConfig = require('./buildConfig');
+const buildConfig = require('./buildConfig')
 
 module.exports = {
   context: __dirname,
@@ -13,6 +14,7 @@ module.exports = {
     buildConfig.paths.app.mainJs,
   ],
   output: {
+    chunkFilename: 'js/[name].js',
     filename: 'js/[name].js',
     path: buildConfig.paths.dist,
     publicPath: '/',
@@ -26,7 +28,7 @@ module.exports = {
         ],
         loader: 'babel-loader',
         options: {
-          cacheDirectory: buildConfig.paths.cache,
+          cacheDirectory: buildConfig.paths.babelCache,
         },
       },
       {
@@ -43,9 +45,14 @@ module.exports = {
     ],
   },
   plugins: [
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false,
+    }),
+
     new DotenvPlugin({
       // We don't really use this as different env files for different people. Just a place to keep common
       // env variables for the project as a whole.
+      allowEmptyValues: true,
       sample: '.env',
       path: '.env',
     }),
@@ -62,7 +69,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks(module) {
-        return module.context && module.context.indexOf('node_modules') !== -1;
+        return module.context && module.context.indexOf('node_modules') !== -1
       },
     }),
 
@@ -88,4 +95,4 @@ module.exports = {
     hot: true,
     port: buildConfig.serverPort,
   },
-};
+}
