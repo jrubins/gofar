@@ -14,8 +14,8 @@ node_modules
 dist
 
 # Logs
-.yarn-error.log
 npm-debug.log
+yarn-error.log
 
 # Computer specific files.
 .DS_Store
