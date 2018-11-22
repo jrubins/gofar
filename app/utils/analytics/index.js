@@ -1,4 +1,4 @@
-import { error } from '../logs'
+import { error } from '@jrubins/utils/lib/logs'
 
 /**
  * The tracker name for the global GA object for pushing events.
@@ -39,7 +39,9 @@ export const EVENT_NAMES = {}
  */
 export function customEvent(eventName, eventOpts = {}) {
   if (!window[GA_TRACKER_NAME]) {
-    error('Tried to fire a custom event before the analytics object was initialized!')
+    error(
+      'Tried to fire a custom event before the analytics object was initialized!'
+    )
 
     return
   }
@@ -58,19 +60,20 @@ export function customEvent(eventName, eventOpts = {}) {
 export function setupAnalytics(analyticsLib) {
   if (analyticsLib === ANALYTICS_LIBS.GA) {
     window.GoogleAnalyticsObject = GA_TRACKER_NAME
-    window[GA_TRACKER_NAME] = window[GA_TRACKER_NAME] || function(...args) {
-      (window[GA_TRACKER_NAME].q = window[GA_TRACKER_NAME].q || []).push(args)
-    }
+    window[GA_TRACKER_NAME] =
+      window[GA_TRACKER_NAME] ||
+      function(...args) {
+        ;(window[GA_TRACKER_NAME].q = window[GA_TRACKER_NAME].q || []).push(
+          args
+        )
+      }
     window[GA_TRACKER_NAME].l = 1 * new Date()
     window[GA_TRACKER_NAME]('create', GA_UA_ID, 'auto')
   }
 
   if (analyticsLib === ANALYTICS_LIBS.INSPECTLET) {
     window.__insp = window.__insp || []
-    window.__insp.push([
-      'wid',
-      process.env.INSPECTLET_APP_ID,
-    ])
+    window.__insp.push(['wid', process.env.INSPECTLET_APP_ID])
   }
 }
 

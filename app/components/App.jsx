@@ -1,37 +1,31 @@
-import React from 'react'
-import {
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom'
+import React, { useState } from 'react'
 
 import HomePage from './pages/home/HomePage'
 
+import FeedbackModal from './reusable/modals/FeedbackModal'
 import Ga from './reusable/scripts/Ga'
 import Inspectlet from './reusable/scripts/Inspectlet'
-import Modal from './reusable/modals/Modal'
 import PageTracker from './reusable/trackers/PageTracker'
 
-const App = () => (
-  <div className="app-container">
-    {/* Our analytics libraries. */}
-    <Ga />
-    <Inspectlet />
+const App = () => {
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false)
 
-    <PageTracker />
+  return (
+    <div className="app-container">
+      {/* Our analytics libraries. */}
+      <Ga />
+      <Inspectlet />
 
-    <Switch>
-      <Route
-        component={HomePage}
-        exact={true}
-        path="/"
+      <PageTracker location={window.location} />
+
+      <HomePage openFeedbackModal={() => setIsFeedbackModalOpen(true)} />
+
+      <FeedbackModal
+        isOpen={isFeedbackModalOpen}
+        setIsOpen={setIsFeedbackModalOpen}
       />
-
-      <Redirect to="/" />
-    </Switch>
-
-    <Modal />
-  </div>
-)
+    </div>
+  )
+}
 
 export default App

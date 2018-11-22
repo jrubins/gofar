@@ -1,32 +1,17 @@
-import { Component } from 'react'
+import { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
 
-import {
-  trackPage,
-} from '../../../utils/analytics'
+import { trackPage } from '../../../utils/analytics'
 
-class PageTracker extends Component {
-  componentDidMount() {
-    this.pageView(this.props.location.pathname)
-  }
+const PageTracker = ({ location }) => {
+  useEffect(
+    () => {
+      trackPage(location.pathname)
+    },
+    [location.pathname]
+  )
 
-  shouldComponentUpdate() {
-    return false
-  }
-
-  /**
-   * Tracks a page view.
-   *
-   * @param {String} pathname
-   */
-  pageView(pathname) {
-    trackPage(pathname)
-  }
-
-  render() {
-    return null
-  }
+  return null
 }
 
 PageTracker.propTypes = {
@@ -35,4 +20,4 @@ PageTracker.propTypes = {
   }).isRequired,
 }
 
-export default withRouter(PageTracker)
+export default PageTracker

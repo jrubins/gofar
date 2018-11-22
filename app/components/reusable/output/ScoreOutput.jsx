@@ -1,23 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import Button from '@jrubins/react-components/lib/forms/fields/Button'
+import _ from 'lodash'
 
 import {
   calculatePointsFromAge,
   calculateProbabilityFromPoints,
 } from '../../../utils/points'
 import { customEvent } from '../../../utils/analytics'
-
-import {
-  getAge,
-  getNumSymptomsSelected,
-  getSymptomPoints,
-} from '../../../reducers'
-import {
-  resetCalculator,
-} from '../../../actions/calculator'
-
-import Button from '../forms/fields/Button'
 
 /**
  * Handles when a user clicks the "Clear All" button on the calculator.
@@ -37,10 +27,17 @@ function handleClearAllClick(resetCalculator) {
  */
 const INITIAL_SYMPTOM_POINTS = -15
 
-const ScoreOutput = ({ age, numSymptomsSelected, resetCalculator, symptomPoints }) => {
-  const totalPoints = calculatePointsFromAge(age) + INITIAL_SYMPTOM_POINTS + symptomPoints
+const ScoreOutput = ({ age, resetCalculator, selectedSymptoms }) => {
+  const numSymptomsSelected = selectedSymptoms.length
+  const symptomPoints = _.reduce(
+    selectedSymptoms,
+    (points, symptom) => points + symptom.points,
+    0
+  )
+  const totalPoints =
+    calculatePointsFromAge(age) + INITIAL_SYMPTOM_POINTS + symptomPoints
   const probability = calculateProbabilityFromPoints(totalPoints)
-  const clearAllBtnDisabled = (numSymptomsSelected === 0 && age === '')
+  const clearAllBtnDisabled = numSymptomsSelected === 0 && !age
 
   return (
     <table className="score-output-table">
@@ -53,14 +50,15 @@ const ScoreOutput = ({ age, numSymptomsSelected, resetCalculator, symptomPoints 
         </tr>
         <tr>
           <td>
-            Probability of survival to discharge with good neurologic status following CPR for in-hospital arrest:
+            Probability of survival to discharge with good neurologic status
+            following CPR for in-hospital arrest:
           </td>
           <td>
             <strong>{probability}</strong>
           </td>
         </tr>
         <tr>
-          <td></td>
+          <td />
           <td className="score-output-table-clear">
             <Button
               handleClick={() => handleClearAllClick(resetCalculator)}
@@ -76,16 +74,13 @@ const ScoreOutput = ({ age, numSymptomsSelected, resetCalculator, symptomPoints 
 }
 
 ScoreOutput.propTypes = {
-  age: PropTypes.string.isRequired,
-  numSymptomsSelected: PropTypes.number.isRequired,
+  age: PropTypes.string,
   resetCalculator: PropTypes.func.isRequired,
-  symptomPoints: PropTypes.number.isRequired,
+  selectedSymptoms: PropTypes.arrayOf(
+    PropTypes.shape({
+      points: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 }
 
-export default connect(state => ({
-  age: getAge(state),
-  numSymptomsSelected: getNumSymptomsSelected(state),
-  symptomPoints: getSymptomPoints(state),
-}), {
-  resetCalculator,
-})(ScoreOutput)
+export default ScoreOutput

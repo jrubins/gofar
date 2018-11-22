@@ -1,18 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import FormGroup from '@jrubins/react-components/lib/forms/FormGroup'
+import _ from 'lodash'
 
-import { getSymptoms } from '../../../reducers'
+import { SYMPTOMS } from '../../../utils/symptoms'
 
-import FormGroup from '../forms/FormGroup'
 import Symptom from './Symptom'
 
-const SymptomsForm = ({ symptoms }) => (
+const SymptomsForm = ({ selectedSymptomIds, toggleSymptom }) => (
   <form className="symptoms-form">
-    {symptoms.map(symptom => (
+    {SYMPTOMS.map(symptom => (
       <FormGroup key={symptom.id}>
         <Symptom
+          isSelected={_.includes(selectedSymptomIds, symptom.id)}
           symptom={symptom}
+          toggleSymptom={toggleSymptom}
         />
       </FormGroup>
     ))}
@@ -20,11 +22,8 @@ const SymptomsForm = ({ symptoms }) => (
 )
 
 SymptomsForm.propTypes = {
-  symptoms: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-  })),
+  selectedSymptomIds: PropTypes.arrayOf(PropTypes.number).isRequired,
+  toggleSymptom: PropTypes.func.isRequired,
 }
 
-export default connect(state => ({
-  symptoms: getSymptoms(state),
-}))(SymptomsForm)
+export default SymptomsForm
