@@ -73,7 +73,7 @@ export default function Index() {
         <a
           className="sm:hidden"
           onClick={() => {
-            customEvent('Feedback', 'Opened', 'Modal')
+            getAnalytics().track('Opened:Feedback Modal')
 
             openFeedbackModal()
           }}
