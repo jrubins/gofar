@@ -1,23 +1,13 @@
-# Caches.
-.babel-cache
-.eslintcache
-.jest-cache
-.tmp
-
-# Database
-db
-
-# Dependencies.
 node_modules
 
-# Builds.
-dist
-
-# Logs
-npm-debug.log
-yarn-error.log
-
-# Computer specific files.
-.DS_Store
+.cache
 .env
-.idea
+.vercel
+.output
+
+/build/
+/public/build
+/api/index.js
+/api/index.js.map
+
+/app/styles/tailwind.css
