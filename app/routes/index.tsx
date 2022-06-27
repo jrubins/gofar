@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import _ from 'lodash'
+import clsx from 'clsx'
 
 import {
   calculatePointsFromAge,
@@ -9,8 +10,14 @@ import {
   SYMPTOMS,
 } from '../utils'
 import type { Symptom as ISymptom } from '../utils'
-import Tooltip from '~/components/Tooltip'
+
+import Button from '~/components/Button'
 import InfoIcon from '~/components/InfoIcon'
+import Input from '~/components/Input'
+import Label from '~/components/Label'
+import Modal, { ModalBody, ModalHeader } from '~/components/Modal'
+import Textarea from '~/components/Textarea'
+import Tooltip from '~/components/Tooltip'
 
 export default function Index() {
   const [age, setAge] = useState<number | ''>('')
@@ -70,16 +77,7 @@ export default function Index() {
       <div className="flex items-center justify-center space-x-2 text-xs sm:px-4">
         <span>Jonathan Rubins &copy; 2014-2022</span>
         <div className="h-1 w-1 rounded-full bg-black sm:hidden" />
-        <a
-          className="sm:hidden"
-          onClick={() => {
-            getAnalytics().track('Opened:Feedback Modal')
-
-            openFeedbackModal()
-          }}
-        >
-          Feedback
-        </a>
+        <Feedback />
       </div>
     </div>
   )
@@ -98,21 +96,22 @@ const PatientAgeForm = ({
 }): JSX.Element => (
   <div className="flex items-center space-x-4 px-4">
     <label htmlFor="patient-age">Patient Age:</label>
-    <input
-      className="h-10 rounded border px-2"
-      id="patient-age"
-      name="patient-age"
-      onChange={(event) => {
-        const newPatientAge = event.target.value
-        const newPatientAgeNum = newPatientAge ? Number(newPatientAge) : ''
+    <div className="w-36">
+      <Input
+        id="patient-age"
+        name="patient-age"
+        onChange={(event) => {
+          const newPatientAge = event.target.value
+          const newPatientAgeNum = newPatientAge ? Number(newPatientAge) : ''
 
-        debouncedAgeCustomEvent(newPatientAgeNum)
+          debouncedAgeCustomEvent(newPatientAgeNum)
 
-        onAgeChanged(newPatientAgeNum)
-      }}
-      type="number"
-      value={age}
-    />
+          onAgeChanged(newPatientAgeNum)
+        }}
+        type="number"
+        value={age}
+      />
+    </div>
   </div>
 )
 
@@ -240,8 +239,7 @@ const ScoreOutput = ({
       </div>
       <div className={rowClasses}>
         <span />
-        <button
-          className="cursor-pointer rounded bg-blue-400 py-2 text-white transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-blue-200"
+        <Button
           disabled={clearAllBtnDisabled}
           onClick={() => {
             getAnalytics().track('Clicked: Clear All')
@@ -251,7 +249,7 @@ const ScoreOutput = ({
           type="button"
         >
           Clear All
-        </button>
+        </Button>
       </div>
     </div>
   )
@@ -287,3 +285,135 @@ const Attribution = (): JSX.Element => (
     </p>
   </div>
 )
+
+const Feedback = (): JSX.Element => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  return (
+    <>
+      <Button
+        asLink
+        onClick={() => {
+          getAnalytics().track('Opened:Feedback Modal')
+
+          setIsModalOpen(true)
+        }}
+        type="button"
+      >
+        Feedback
+      </Button>
+
+      {isModalOpen && (
+        <FeedbackModal
+          onCloseModal={() => {
+            setIsModalOpen(false)
+          }}
+        />
+      )}
+    </>
+  )
+}
+
+const FeedbackModal = ({
+  onCloseModal,
+}: {
+  onCloseModal(): void
+}): JSX.Element => {
+  const [feedback, setFeedback] = useState('')
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false)
+
+  return (
+    <Modal onCloseModal={onCloseModal}>
+      <ModalBody>
+        <div className="w-[600px] max-w-full">
+          <div className="mb-4">
+            <ModalHeader onClickClose={onCloseModal}>Feedback</ModalHeader>
+          </div>
+
+          {/* This is a hidden iFrame that is used to submit the feedback form data to the Google spreadsheet */}
+          <iframe
+            className="hidden"
+            name="feedback-iframe"
+            title="feedback-iframe"
+          />
+
+          <form
+            action="https://docs.google.com/forms/d/1ji9XNn0RiJzuaRAtCObXhVi5_Pe54K2dHafOVytTpJ0/formResponse"
+            method="POST"
+            onSubmit={() => {
+              getAnalytics().track('Submitted: Feedback')
+
+              setIsFormSubmitted(true)
+            }}
+            target="feedback-iframe"
+          >
+            <div
+              className={clsx('space-y-4', {
+                hidden: isFormSubmitted,
+              })}
+            >
+              <p className="bg-blue-400/25 p-4">
+                If you have any improvements or suggestions for the GO-FAR
+                calculator or are experiencing any issues, please submit your
+                feedback using the form below. If you supply your name and
+                email, I will be sure to get back to you in a timely manner.
+                Thanks!
+              </p>
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="feedback-name">Name</Label>
+                  <Input
+                    id="feedback-name"
+                    name="entry.468931824"
+                    type="text"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="feedback-email">Email</Label>
+                  <Input
+                    id="feedback-email"
+                    name="entry.455716436"
+                    type="email"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="feedback-text">Feedback</Label>
+                  <Textarea
+                    id="feedback-text"
+                    name="entry.612948227"
+                    onChange={(event) => setFeedback(event.target.value)}
+                    rows={6}
+                    value={feedback}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div
+              className={clsx({
+                hidden: !isFormSubmitted,
+              })}
+            >
+              <p className="bg-success padding">
+                Thanks for your feedback! If you have provided contact
+                information, I will get back to you as soon as possible.
+              </p>
+            </div>
+
+            <div className="mt-4 text-right">
+              {isFormSubmitted ? (
+                <Button onClick={onCloseModal} type="button">
+                  Close
+                </Button>
+              ) : (
+                <Button disabled={!_.trim(feedback)} type="submit">
+                  Submit
+                </Button>
+              )}
+            </div>
+          </form>
+        </div>
+      </ModalBody>
+    </Modal>
+  )
+}
