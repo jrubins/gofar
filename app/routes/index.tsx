@@ -154,6 +154,7 @@ const Symptom = ({
       <input
         checked={isSelected}
         className="mt-1"
+        name={`symptom-${symptom.name}`}
         onChange={_onSymptomToggled}
         onKeyDown={(event) => {
           if (event.key === 'Enter') {
