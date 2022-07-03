@@ -26,8 +26,6 @@ Open up [http://localhost:3000](http://localhost:3000) and you should be ready t
 
 ## Todo
 
-- [ ] Delete Netlify project
-- [ ] Set up Husky for pre-commit checks
 - [ ] Set up Sentry for error monitoring
 - [ ] Verify FullStory sessions are being captured correctly and delete Inspectlet account
 - [ ] Add automated tests (unit and E2E)
