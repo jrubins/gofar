@@ -15,7 +15,7 @@ import {
 } from '@remix-run/react'
 import invariant from 'tiny-invariant'
 
-import tailwindStylesheetUrl from './styles/tailwind.css'
+import tailwindStylesheetUrl from './tailwind.css'
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: tailwindStylesheetUrl }]
