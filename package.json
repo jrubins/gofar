@@ -20,12 +20,14 @@
     "format": "prettier --write .",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "prepare": "husky install",
+    "test": "vitest",
     "typecheck": "tsc -b",
-    "validate": "run-p lint typecheck"
+    "validate": "run-p \"test -- --run\" lint typecheck"
   },
   "eslintIgnore": [
-    "/node_modules",
+    "/api",
     "/build",
+    "/node_modules",
     "/public/build"
   ],
   "lint-staged": {
@@ -63,17 +65,23 @@
     "@remix-run/dev": "1.6.1",
     "@remix-run/eslint-config": "1.6.1",
     "@remix-run/serve": "1.6.1",
+    "@testing-library/dom": "8.14.0",
+    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/react": "12.1.5",
+    "@testing-library/user-event": "14.2.1",
     "@types/eslint": "8.4.3",
     "@types/lodash": "4.14.182",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
+    "@vitejs/plugin-react": "1.3.2",
     "autoprefixer": "10.4.7",
     "binode": "1.0.5",
     "cross-env": "7.0.3",
     "cssnano": "5.1.12",
     "eslint": "8.18.0",
     "eslint-config-prettier": "8.5.0",
+    "happy-dom": "6.0.0",
     "husky": "8.0.1",
     "lint-staged": "13.0.3",
     "npm-run-all": "4.1.5",
@@ -84,7 +92,10 @@
     "prettier": "2.7.1",
     "prettier-plugin-tailwindcss": "0.1.11",
     "tailwindcss": "3.1.4",
-    "typescript": "4.7.4"
+    "typescript": "4.7.4",
+    "vite": "2.9.13",
+    "vite-tsconfig-paths": "3.5.0",
+    "vitest": "0.16.0"
   },
   "engines": {
     "node": ">=16"
