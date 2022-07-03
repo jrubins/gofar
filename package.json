@@ -25,8 +25,9 @@
     "validate": "run-p \"test -- --run\" lint typecheck"
   },
   "eslintIgnore": [
-    "/node_modules",
+    "/api",
     "/build",
+    "/node_modules",
     "/public/build"
   ],
   "lint-staged": {
